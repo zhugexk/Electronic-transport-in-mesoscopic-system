@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper]{article}
+%-------------------------
+% Basic packages
+%-------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{physics}    % convenient bra-ket, derivatives, etc.
+\usepackage{siunitx}    % units
+\usepackage{braket}     % alternate bra/ket macros
+\usepackage{mhchem}     % chemistry notation if needed
+
+% Figures & graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% References, hyperlinks, and clever names
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% Lists and layout
+\usepackage{enumitem}
+\setlist{itemsep=2pt,parsep=2pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%-------------------------
+% Useful macros
+%-------------------------
+% \newcommand{\dd}{\mathrm{d}}                      % differential
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\eexp}{\mathrm{e}}                    % exponential base
+\DeclareMathOperator{\sgn}{sgn}
+
+% Shortcuts for common physics notation (overrides safe if physics package present)
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+%-------------------------
+% Bibliography (biber/biblatex) - optional
+%-------------------------
+% \usepackage[backend=biber,style=phys]{biblatex}
+% \addbibresource{references.bib}
+
+%-------------------------
+% Document metadata
+%-------------------------
+\title{Execise 1}
+\author{Zhuge X.K.}
+\date{\today}
+
+%-------------------------
+% Document
+%-------------------------
+\begin{document}
+
+\maketitle
+
+Calculate the DOS for 2D \& 3D Dirac fermion using the Hamiltonians below:
+\begin{equation*}
+    \begin{aligned}
+        H_{2D} &= \hbar v_F (k_x \sigma_x + k_y \sigma_y) \\
+        H_{3D} &= \hbar v_F (k_x \sigma_x + k_y \sigma_y + k_z \sigma_z)
+    \end{aligned}
+\end{equation*}
+\begin{proof}
+    The DOS is defined as:
+    \begin{equation*}
+        D(E) = \int \frac{d^d k}{(2\pi)^d} \delta(E - E(k))
+    \end{equation*}
+    where $d$ is the dimension (2 or 3), and $E(k)$ is the eigenvalue of the Hamiltonian. For 2D case, the eigenvalue is:
+    \begin{equation*}
+        E = \pm \hbar v_F \sqrt{k_x^2 + k_y^2} = \pm \hbar v_F k
+    \end{equation*}
+    Thus,
+    \begin{equation*}
+        D(E) = \int \frac{d^2 k}{(2\pi)^2} \delta(E - \hbar v_F k) = \int_0^{2\pi} d\theta \int_0^\infty \frac{k dk}{(2\pi)^2} \delta(E - \hbar v_F k)
+    \end{equation*}
+    Using the property of delta function, we have:
+    \begin{equation*}
+        D(E) = \frac{1}{(2\pi)^2} 2\pi \frac{E}{\hbar^2 v_F^2} = \frac{E}{2\pi \hbar^2 v_F^2}
+    \end{equation*}
+
+    For 3D case, the eigenvalue is:
+    \begin{equation*}
+        E = \pm \hbar v_F \sqrt{k_x^2 + k_y^2 + k_z^2} = \pm \hbar v_F k
+    \end{equation*}
+    Thus,
+    \begin{equation*}
+        D(E) = \int \frac{d^3 k}{(2\pi)^3} \delta(E - \hbar v_F k) = \int_0^{\pi} d\theta \int_0^{2\pi} d\phi \int_0^\infty \frac{k^2 dk}{(2\pi)^3} \sin\theta \delta(E - \hbar v_F k)
+    \end{equation*}
+    Using the property of delta function, we have:
+    \begin{equation*}
+        D(E) = \frac{1}{(2\pi)^3} 4\pi \frac{E^2}{\hbar^3 v_F^3} = \frac{E^2}{2\pi^2 \hbar^3 v_F^3}
+    \end{equation*}
+\end{proof}
+
+\end{document}

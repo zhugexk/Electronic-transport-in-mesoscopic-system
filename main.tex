@@ -1,0 +1,1448 @@
+% /Users/zgxk/Documents/Latex/note/main.tex
+\documentclass[11pt,a4paper]{book}
+
+%-------------------------
+% Basic packages
+%-------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{physics}    % convenient bra-ket, derivatives, etc.
+\usepackage{siunitx}    % units
+\usepackage{braket}     % alternate bra/ket macros
+\usepackage{mhchem}     % chemistry notation if needed
+
+% Figures & graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% References, hyperlinks, and clever names
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% Lists and layout
+\usepackage{enumitem}
+\setlist{itemsep=2pt,parsep=2pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%-------------------------
+% Useful macros
+%-------------------------
+% \newcommand{\dd}{\mathrm{d}}                      % differential
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\eexp}{\mathrm{e}}                    % exponential base
+\DeclareMathOperator{\sgn}{sgn}
+
+% Shortcuts for common physics notation (overrides safe if physics package present)
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+%-------------------------
+% Bibliography (biber/biblatex) - optional
+%-------------------------
+% \usepackage[backend=biber,style=phys]{biblatex}
+% \addbibresource{references.bib}
+
+%-------------------------
+% Document metadata
+%-------------------------
+\title{Electronic Transport in Mesoscopic Systems}
+\author{S. Datta}
+\date{\today}
+
+%-------------------------
+% Document
+%-------------------------
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\bigskip
+
+\numberwithin{equation}{chapter}
+\numberwithin{equation}{section}
+
+\chapter{Preliminary concepts}
+\section{Two-dimesional electron gas}
+The drift velocity of electrons under an applied electric field $\vec{E}$ is given by
+\begin{equation}
+    \left[\frac{\dd p}{\dd t}\right]_{scattering} = \left[\frac{\dd p}{\dd t}\right]_{field}
+\end{equation}
+Hence, ($\tau_m:momentum relaxation time$)
+\begin{equation}
+    \frac{m \vec{v}_d}{\tau_m} = e \vec{E} \Rightarrow \vec{v}_d = \frac{e \tau_m}{m} \vec{E}
+\end{equation}
+The mobility $\mu$ is defined as the ratio of the drift velocity to the applied electric field, i.e.,
+\begin{equation}
+    \mu = \frac{v_d}{E} = \frac{e \tau_m}{m}
+\end{equation}
+
+\section{Effective mass, density of states etc.}
+The dynamics of electron in the conduction band can be described by an equation of the form
+\begin{equation}
+    \left[E_c+\frac{(\ii \hbar \nabla + e \vec{A})^2}{2 m} + U(\vec{r})\right] \psi(\vec{r}) = E \psi(\vec{r})
+\end{equation}
+$U(\vec{r})$ is the potential energy due to space-charge etc., and $\vec{A}$ is the vector potential associated with magnetic field $\vec{B} = \nabla \times \vec{A}$. Considering a homogeneous material with $U(\vec{r}) = 0$, and $\vec{A} = 0$, and $E_c=\mathrm{constant}$, the wavefunction solutions are plane waves of the form
+\begin{equation}
+    \psi(\vec{r}) = \frac{1}{\sqrt{V}} \eexp^{\ii \vec{k} \cdot \vec{r}}
+\end{equation}
+and not that of Bloch waves
+\begin{equation}
+    \psi(\vec{r}) = u_{\vec{k}}(\vec{r}) \eexp^{\ii \vec{k} \cdot \vec{r}}
+\end{equation}
+
+\subsection{Subbands}
+Consider the 2-DEG. The electrons are free to propagate in the x-y plane but are confined by some potential $U(z)$ in the z-direction. The wavefunction in such a case(with vector potential $\vec{A}=0$) can be written as
+\begin{equation}
+    \psi(\vec{r}) = \phi_n(z) \eexp^{\ii \left(k_x x + k_y y\right)}
+\end{equation}
+with the dispersion relation
+\begin{equation}
+    E = E_c +  \epsilon_n + \frac{\hbar^2 \left(k_x^2 + k_y^2\right)}{2 m}
+\end{equation}
+The index $n$ numbers the different subbands each having wavefunction $\phi_n(z)$ and a cut-off energy $\epsilon_n$. Usually at low tempertures with low carrier densities, only the lowest subband $n=1$ is occupied and the higher subbands are empty. We can then ignore the $z$-direction altogether and treat the system as a purely 2D system in $x$-$y$ plane. We will use the following equation:
+\begin{equation}
+    \left[E_s+\frac{(\ii \hbar \nabla + e \vec{A})^2}{2 m}\right] \psi(x,y) = E \psi(x,y)
+\end{equation}
+where $E_s = E_c + \epsilon_1$ is the conduction band edge of the lowest subband.
+
+\subsection{Band diagrams}
+Setting $U=0$ and $\vec{A}=0$, The eigenfunctions normalized to an area $S$ have the form
+\begin{equation}
+    \psi(x,y) = \frac{1}{\sqrt{S}}\exp(\ii k_x x) \exp (\ii k_y y)
+\end{equation}
+with the dispersion relation
+\begin{equation}
+    E = E_s + \frac{\hbar^2 \left(k_x^2 + k_y^2\right)}{2 m}
+\end{equation}
+
+\subsection{Density of states}
+We denote the total number of states having an energy less than $E$ as $N_T(E)$. We count the number of states contained within a circle of radius $k$, where
+\begin{equation}
+    E = E_s + \frac{\hbar^2 k^2}{2 m} \Rightarrow k = \sqrt{\frac{2 m (E - E_s)}{\hbar^2}}
+\end{equation}
+using peroidic boundary conditions, the allowed values of $k_x$ and $k_y$ are given by
+\begin{equation}
+    k_x = \frac{2 \pi}{L_x} n_x, \quad k_y = \frac{2 \pi}{L_y} n_y
+\end{equation}
+where $n_x$ and $n_y$ are integers. Each allowed state occupies an area of
+\begin{equation}
+    \Delta k_x \Delta k_y = \frac{(2 \pi)^2}{L_x L_y} = \frac{(2 \pi)^2}{S}
+\end{equation}
+while the area of the circle is $\pi k^2$. Thus the total number of states having energy less than $E$ is given by
+\begin{equation}
+    N_T(E) = g_s \frac{\pi k^2}{(2 \pi)^2 / S} = g_s \frac{S}{4 \pi} k^2 = \frac{m}{\pi \hbar^2} S (E-E_s)
+\end{equation}
+where $g_s = 2$ is the spin degeneracy factor. The density of states(DOS) per unit area is given by
+\begin{equation}
+    N(E) = \frac{1}{S} \frac{\dd N_T(E)}{\dd E} = \frac{m}{\pi \hbar^2}\theta(E - E_s)
+\end{equation}
+
+\subsection{Degenerate and non-degenerate conductors}
+At equilibrium, the available states in a conductor are filled up according to the Fermi function
+\begin{equation}
+    f_0(E) = \frac{1}{1 + \exp(E - E_f)/k_B T}
+\end{equation}
+In high temperture or non-degenerate limit($\exp[E_s-E_f]/k_B T \gg 1$) the Fermi function can be approximated as
+\begin{equation}
+    f_0(E) \approx \exp(-(E - E_f)/k_B T)
+\end{equation}
+In low temperture or degenerate limit($\exp[E_s-E_f]/k_B T \ll 1$), the Fermi function can be approximated as
+\begin{equation}
+    f_0(E) \approx \theta(E_f - E)
+\end{equation}
+The equilibrium electron density $n_s$(per unit area) is given by
+\begin{equation}
+    n_s = \int N(E) f_0(E) \dd E
+\end{equation}
+For degenerate conductors it is easy to perform the integration:
+\begin{equation}
+    \begin{aligned}
+        n_s &= \int \theta(E_f-E) \theta(E-E_s) \frac{m}{\pi \hbar} \dd E \\
+        & = \frac{m}{\pi \hbar^2} (E_f - E_s) = N_s(E_f-E_s), \quad N_s = \frac{m}{\pi \hbar^2}
+    \end{aligned}
+\end{equation}
+The Fermi wavenumber $k_f$ is given by
+\begin{equation}
+    E_f-E_s = \frac{\hbar^2 k_f^2}{2 m} \Rightarrow k_f = \sqrt{2 \pi n_s} = \sqrt{\frac{2 m (E_f - E_s)}{\hbar^2}}
+\end{equation}
+The corresponding Fermi velocity $v_f$ is $v_f=\hbar k_f/m$.
+\section{Characteristic lengths}
+\subsection{wavelength}
+The Fermi wavelength is
+\begin{equation}
+    \lambda_f = \frac{2 \pi}{k_f} = \sqrt{\frac{2 \pi}{n_s}}
+\end{equation}
+\subsection{Mean free path}
+The momentum relaxation time $\tau_m$ is relateed to the collisition time $\tau_c$ by a relation of the form
+\begin{equation}
+    \frac{1}{\tau_m} \rightarrow \frac{1}{\tau_c} \alpha_m
+\end{equation}
+where the factor $\alpha_m$ (lying between 0 and 1) denotes the "effectiveness" of an individual collision in destroying momentum. The factor $\alpha_m$ is then very small so that the momentum relaxation time is much longer than the collision time. The mean free path $l$ is given by
+\begin{equation}
+    l = v_f \tau_m
+\end{equation}
+where $\tau_m$ is the momentum relaxation time and $v_f$ is the Fermi velocity.
+\subsection{Phase coherence length}
+In analogy with the momentum relaxation time we could write
+\begin{equation}
+    \frac{1}{\tau_\phi} \rightarrow \frac{1}{\tau_c} \alpha_\phi
+\end{equation}
+where $\alpha_\phi$ is the "effectiveness" of an individual collision in destroying phase coherence. The phase coherence length $L_\phi$ is then given by
+\begin{equation}
+    L_\phi = v_f \tau_\phi
+\end{equation}
+The momentum relaxation time $\tau_m$ is usually much shorter than the phase relaxation time $\tau_\phi$ since many collisions are required to randomize the phase of the electron wavefunction. After an interval of time $\tau_m$ the velocity is completely randomized so that the electronic trajectory over a time $\tau_\phi$ can be viewed as a random walk with a step length of $v_f \tau_m$ and a total number of steps of $\tau_\phi/\tau_m$. Since individual trajectory are in random directions($\theta$), the root mean square distance traveled by the electron in a particular direction is obtained by summing the squares of their lengths:
+\begin{equation}
+    L_\phi^2 = \frac{\tau_\phi}{\tau_m}(v_f\tau_m)^2\braket{\cos^2 \theta}, \quad \braket{\cos^2 \theta} = \int_0^{2 \pi} \cos^2 \theta \frac{\dd \theta}{2 \pi} = \frac{1}{2}
+\end{equation}
+Hence,
+\begin{equation}
+    L_\phi^2 = \frac{1}{2}(v_f \tau_m)^2\frac{\tau_\phi}{\tau_m} = v_f^2 \tau_m \tau_\phi/2
+\end{equation}
+The diffusion coefficient $D$ is defined as
+\begin{equation}
+    D = \frac{1}{2} v_f^2 \tau_m
+\end{equation}
+Thus we have
+\begin{equation}
+    L_\phi^2 = D \tau_\phi
+\end{equation}
+\section{Low-field magnetoresistance}
+\subsection{Drude model}
+The drift velocity in the presence of both electric and magnetic fields is given by
+\begin{equation} \label{eq:drift_velocity}
+    \frac{m\vec{v}_d}{\tau_m} = e\left[\vec{E} + \vec{v}_d \times \vec{B}\right]
+\end{equation}
+We can rewrite (\ref{eq:drift_velocity}) in the form
+\begin{equation}
+    \begin{bmatrix}
+        m/e\tau_m & -B \\
+        B & m/e\tau_m
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{dx} \\ v_{dy}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        E_x \\ E_y
+    \end{bmatrix}
+\end{equation}
+The current density $\vec{J} = -e n_s \vec{v}_d$ is related to the electric field by the conductivity tensor $\sigma$ as $\vec{J} = \sigma \vec{E}$. Thus we have
+\begin{equation}
+    \begin{bmatrix}
+        m/e\tau_m & -B \\
+        B & m/e\tau_m
+    \end{bmatrix}
+    \begin{bmatrix}
+        J_x/e n_s \\ J_y/e n_s
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        E_x \\ E_y
+    \end{bmatrix}
+\end{equation}
+Rearanging we obtain
+\begin{equation}
+    \begin{bmatrix}
+        E_x \\ E_y
+    \end{bmatrix}
+    =
+    \sigma^{-1}
+    \begin{bmatrix}
+        1 & -\mu B \\
+        \mu B & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        J_x \\ J_y
+    \end{bmatrix}
+\end{equation}
+where $\sigma = n_s e \mu$ is the conductivity at zero magnetic field and $\mu = e \tau_m/m$ is the mobility. The resistivity tensor $\rho = \sigma^{-1}$ is given by
+\begin{equation}
+    \begin{bmatrix}
+        E_x \\ E_y
+    \end{bmatrix}
+    \begin{bmatrix}
+        \rho_{xx} & \rho_{xy} \\
+        \rho_{yx} & \rho_{yy}
+    \end{bmatrix}
+    \begin{bmatrix}
+        J_x \\ J_y
+    \end{bmatrix}
+\end{equation}
+where
+\begin{equation}
+    \rho_{xx} = \rho_{yy} = \frac{1}{\sigma}, \quad \rho_{xy} = -\rho_{yx} = \frac{\mu B}{\sigma} = B/n_s e
+\end{equation}
+Thus this simple Drude model predicts that the longitudinal resistivity $\rho_{xx}$ is independent of magnetic field while the Hall resistivity $\rho_{xy}$ increases linearly with magnetic field.
+
+\section{High-field magnetoresistance}
+When the magnetic field is sufficiently strong such that the cyclotron frequency $\omega_c = e B/m$ becomes comparable to the collision frequency $1/\tau_m$, the simple Drude model breaks down. In this high-field regime, the electrons undergo cyclotron motion between collisions, leading to quantization of energy levels into Landau levels. The density of states becomes a series of delta functions at these Landau levels, significantly altering the transport properties of the system. This results in phenomena such as the quantum Hall effect, where the Hall resistivity exhibits plateaus at quantized values, and the longitudinal resistivity shows oscillatory behavior known as Shubnikov-de Haas oscillations.
+
+\subsection{Origin of SdH oscillations}
+The Sdh oscillations arise because at high magnetic fields, the step-like density of states associated with a 2-DEG
+\begin{equation}
+    N(E) = \frac{m}{\pi \hbar^2} \theta(E - E_s)
+\end{equation}
+breaks up into a series of delta functions spaced by the cyclotron energy $\hbar \omega_c$. where $\omega_c = e B/m$ is the cyclotron frequency.
+\begin{equation}
+    N_s(E,B) \approx \frac{2 e B}{h} \sum_{n=0}^{\infty} \delta(E - E_n), \quad E_n = E_s + (n + \frac{1}{2}) \hbar \omega_c
+\end{equation}
+As we change the magnetic field $B$, the energies of the landau levels change. For a given electron density $n_s$, the number of filled landau levels is given by
+\begin{equation}
+    N = \frac{n_s h}{2 e B}
+\end{equation}
+The resistivity $\rho_{xx}$ goes through maxima each time a landau level passes through the Fermi energy $E_f$.  Hence the magnetic field values $B_1$ and $B_2$ corresponding to two successive maxima in $\rho_{xx}$ are given by
+\begin{equation}
+    \frac{n_s h}{2 e B_1} - \frac{n_s h}{2 e B_2} = 1
+\end{equation}
+so that
+\begin{equation}
+    n_s=\frac{2 e}{h} \frac{B_1 B_2}{B_2 - B_1}
+\end{equation}
+Choose different magnetic field values corresponding to successive maxima in $\rho_{xx}$ and use the above equation to calculate $n_s$.
+\subsection{Why do discrete states form at high magnetic fields?}
+Classically, an electron in a magnetic field moves in a circular orbit with cyclotron frequency $\omega_c = e B/m$, and the radius $r_c=v/\omega_c$. Quantum mechanically, the orbit must be an integer number ($n$) of de Broglie wavelengths:
+\begin{equation}
+    2\pi r_c = n h/m v
+\end{equation}
+We find the kinetic energy can only take discrete values given by $mv^2/2 = n\hbar \omega_c/2$. Hence we would expect that
+\begin{equation}
+    E_n = E_s +  \frac{n}{2} \hbar \omega_c  
+\end{equation}
+This is a little different from the correct answer from a proper quantum mechanical treatment, which gives
+\begin{equation}    
+    E_n = E_s + \left(n + \frac{1}{2}\right) \hbar \omega_c  
+\end{equation}
+These energy level $E_n$ with different values are referred to as Landau levels. The density of states associated with each Landau level is given by
+\begin{equation}    
+    N_s(E, B) \approx N_0 \sum_{n=0}^{\infty} \delta \left(E - E_n\right), \quad N_0 = \frac{2 e B}{h}  
+\end{equation}
+The correct prefactor $N_0$ can be obtained by noting that the magnetic field causes all the states in an energy range $\hbar \omega_c$ to be concentrated into a single Landau level. Since the density of states in the absence of magnetic field is $N_s = m/\pi \hbar^2$, we have
+\begin{equation}    
+    N_0 = N_s \hbar \omega_c = \frac{m}{\pi \hbar^2} \frac{\hbar e B}{m} = \frac{2 e B}{h}  
+\end{equation}
+
+\section{Transverse modes}
+Transverse mode or subbands are analogous to the transverse modes of electromagnetic waveguids. In narrow conductors. the different transverse modes are well seperated in energy and such conductors are often called electron waveguids. Consider a rectangular conductor that is uniform in the $x$-direction and has some transverse confining potential $U(y)$. The motion of electrons in such a conductor can be described by the equation
+\begin{equation}
+    \left[E_c + \frac{(\ii \hbar \nabla + e \vec{A})^2}{2 m} + U(y)\right)] \psi(x,y) = E \psi(x,y)
+\end{equation}
+We assume a constant magnetic field $\vec{B}$ along the $z$-direction. Choosing the Landau gauge $\vec{A} = (-B y, 0, 0)$, we can write the wavefunction as
+\begin{equation}
+    \left[E_s + \frac{(p_x+eBy)^2}{2 m} + \frac{p_y^2}{2 m} + U(y)\right] \psi(x,y) = E \psi(x,y)
+\end{equation}
+The solutions can be written as
+\begin{equation}
+    \psi(x,y) = \frac{1}{\sqrt{L}}\exp(\ii k x) \chi(y)
+\end{equation}
+where $\chi(y)$ satisfies the equation
+\begin{equation}
+    \left[E_s + \frac{(\hbar k + e B y)^2}{2 m} + \frac{p_y^2}{2 m} + U(y)\right] \chi(y) = E \chi(y)
+\end{equation}
+For a parabolic potential $U(y) = \frac{1}{2} m \omega_0^2 y^2$, the analytical solution is possible.
+\subsection{Confined electrons in zero magnetic field}
+The equation for $\chi(y)$ reduces to
+\begin{equation}
+    \left[E_s + \frac{\hbar^2 k^2}{2 m} + \frac{p_y^2}{2 m} + U(y)\right] \chi(y) = E \chi(y)
+\end{equation}
+The eigenfunctions and eigenfunctions are given by
+\begin{equation}
+        \chi_{n,k}(y) = u_n(q) , \quad q = y/y_0, \quad y_0 = \sqrt{\frac{\hbar}{m \omega_0}} 
+\end{equation}
+\begin{equation}
+    E(n,k) = E_s + \hbar \omega_0 \left(n + \frac{1}{2}\right) + \frac{\hbar^2 k^2}{2 m}, \quad n=0,1,2,...
+\end{equation}
+where $u_n(q) = \exp(-q^2/2)H_n(q)$, $H_n(q)$ being the $n$th Hermite polynomial. The velocity is obtained from the slope of the dispersion curve:
+\begin{equation}
+    v_n(k) = \frac{1}{\hbar} \frac{\partial E(n,k)}{\partial k} = \frac{\hbar k}{m}
+\end{equation}
+
+\subsection{Unconfined electrons in non-zero magnetic field}
+The equation for $\chi(y)$ reduces to
+\begin{equation}
+    \left[E_s + \frac{(\hbar k + e B y)^2}{2 m} + \frac{p_y^2}{2 m}\right] \chi(y) = E \chi(y)
+\end{equation}
+which can be rewritten as
+\begin{equation}
+    \left[E_s + \frac{p_y^2}{2 m} + \frac{1}{2} m \omega_c^2 (y + y_k)^2\right] \chi(y) = E \chi(y), \quad y_k = \frac{\hbar k}{e B}, \quad \omega_c = \frac{eB}{m}
+\end{equation}
+The eigenfunctions and eigenvalues are given by
+\begin{equation}
+    \chi_{n,k}(y) = u_n(q+q_k), \quad q = \sqrt{m\omega_c/\hbar} y, \quad q_k = \sqrt{m\omega_c/\hbar} y_k
+\end{equation}
+The group velocity is vanished for eigenvalues are independent of $k$. The number of electrons which can fit into one Landau level equals to the 2D density of states times the cyclotron energy:
+\begin{equation}
+    N = N_s S \hbar \omega_c = \frac{m S}{\pi \hbar^2} \frac{\hbar e B}{m} = \frac{e B S}{\pi \hbar}
+\end{equation}
+Noting that the allowed values of $k$ are given by $k = 2 \pi n / L$, where $n$ is an integer, the spacing between successive values of $y_k$ is given by
+\begin{equation}
+    \Delta y_k = \frac{\hbar \Delta k}{e B} = \frac{2 \pi \hbar}{e B L}
+\end{equation}
+Thus the total number of allowed values of $y_k$ in a sample of width $W$ is given by
+\begin{equation}
+    N = g_s \frac{W}{\Delta y_k} = \frac{e B S}{\pi \hbar}
+\end{equation}
+
+\subsection{Confined electrons in non-zero magnetic field}
+When both the magnetic field and the confining parabolic potential are present, the equation for $\chi(y)$ becomes
+\begin{equation}
+    \left[ E_s + \frac{p_y^2}{2 m} + \frac{(eBy + \hbar k)^2}{2 m} + \frac{1}{2} m \omega_0^2 y^2 \right]  \chi(y) = E \chi(y)
+\end{equation}
+This can be rewritten as
+\begin{equation}
+    \left[ E_s + \frac{p_y^2}{2 m} + \frac{1}{2} m \frac{\omega_0^2 \omega_c^2}{\omega_{c0}^2} y_k^2 + \frac{1}{2} m \omega_{c0}^2 \left(y + \frac{\omega_c^2}{\omega_{c0}^2} y_k\right)^2 \right]  \chi(y) = E \chi(y)
+\end{equation}
+where $\omega_{c0}^2 = \omega_c^2 + \omega_0^2$. The eigenfunctions and eigenvalues are given by
+\begin{equation}
+    \chi_{n,k}(y) = u_n\left(q + \frac{\omega_c^2}{\omega_{c0}^2} q_k\right), \quad q = \sqrt{m \omega_{c0}/\hbar} y, \quad q_k = \sqrt{m \omega_{c0}/\hbar} y_k
+\end{equation}
+\begin{equation}
+    E(n,k) = E_s + \hbar \omega_{c0} \left(n + \frac{1}{2}\right) + \frac{\hbar^2 k^2}{2 m} \frac{\omega_0^2}{\omega_{c0}^2}, \quad n=0,1,2,...
+\end{equation}
+The group velocity is given by
+\begin{equation}
+    v_n(k) = \frac{1}{\hbar} \frac{\partial E(n,k)}{\partial k} = \frac{\hbar k}{m} \frac{\omega_0^2}{\omega_{c0}^2}
+\end{equation}
+The effect of the magnetic field is to increase the effective mass by
+\begin{equation}
+    m^* = m \frac{\omega_{c0}^2}{\omega_0^2} = m \left(1 + \frac{\omega_c^2}{\omega_0^2}\right)
+\end{equation}
+As the magnetic field increases, the dispersion relation look nealy flat, similar to the Landau levels. The spatial localtion of the eigenstates $\psi_{nk}$ is centered around $y = -y_k$ where
+\begin{equation}
+    y_k = \frac{\hbar k}{e B} \Rightarrow y_k = v_n(k)\frac{\omega_0^2 + \omega_c^2}{\omega_c\omega_0^2}
+\end{equation}
+
+\section{Drift velocity or Fermi velocity?}
+The current $J$ in a homogeneous conductor is expressed as the product of the electron density and the drift velocity $v_d$:
+\begin{equation}
+    J = -e n_s v_d
+\end{equation}
+In low temperature, the current is contributed mainly by electrons near the Fermi energy $E_f$. An electric field makes the entire distribution of states in $k$-space shift by $\vec{k}_d$
+\begin{equation}
+    \left[f(\vec{k})\right]_{\vec{E}\neq 0} = \left[f(\vec{k} - \vec{k}_d)\right]_{\vec{E}=0}
+\end{equation}
+where
+\begin{equation}
+    \frac{\hbar \vec{k}_d}{m} = \vec{v}_d \Rightarrow \vec{k}_d=e\vec{E}\tau_m/\hbar
+\end{equation}
+Assuming that the shit $k_d$ is small compared to $k_f$, from a collective point view the electric field only moves a few electrons from $-k_f$ to $+k_f$, We could rewrite the current density in slightly different form to reflect this point view:
+\begin{equation}
+    \vec{J} = e \left[ n_s \frac{v_d}{v_f}\right] \vec{v_f}
+\end{equation}
+\subsection{Quasi-Fermi level separation}
+Quasi-Fermi level $F^+$ is defined for the electrons that move in the same direction as the force $e\vec{E}$ and another quasi-Fermi level $F^-$ for the electrons that move in the opposite direction. All the states completely full and carry no current. But in the energy range between $F^+$ and $F^-$, the states in the $-k_x$ are empty while those in the $+k_x$ are full and it is the electrons in these states that carry the current. We can estimate $F^+$ and $F^-$ by noting that
+\begin{equation}
+    F^+ \sim \frac{\hbar^2 (k_f+k_d)^2}{2m}, \quad F^- ~ \frac{\hbar^2 (k_f-k_d)^2}{2m}
+\end{equation}
+Assuming that $k_f \gg k_d$, we have
+\begin{equation}
+    F^+ - F^- \sim \frac{\hbar^2 k_f}{m} 2 k_d = 2e E v_f\tau_m = 2eEL_m
+\end{equation}
+The separation of quasi-Fermi levels is propotional to the energy that an electron gains in electric field over a mean free path.
+
+\subsection{Einstein relation}
+Consider a situation where a bias voltage $V$ is applied across a rectangular conductor with length $L$ and width $W$. The electric field in the conductor is given by $E = \hat{x}V/L$ in the conductor. The buttom of the subband $E_s$ acquaires a constant slope proportional to the electric field:
+\begin{equation}
+    \vec{E} = \nabla E_s/e
+\end{equation}
+In a homogeneous conductor, the electron density is constant everywhere. Since the electron density is a function of $(F_n-E_s)$, this means that the quasi-Fermi level $F_n = (F^+ + F^-)/2$ and the band-edge $E_s$ run parallel to each other. The potential in contact 1 is $\mu_1$ and that in contact 2 is $\mu_2$. In this energy range, the electron density is $N_s(\mu_1 - \mu_2)$ in contact 1 and no electrons in contact 2. Since there is a concentration gradient from contact 1 to contact 2. This sets up a diffusion current can be written from diffusion equation as:
+\begin{equation}
+    \vec{J} = -e D \nabla n = e^2 D N_s \frac{(\mu_1 - \mu_2)}{eL} \hat{x} = e^2 D N_s \vec{E}
+\end{equation}
+Comparing with the relation $\vec{J} = \sigma \vec{E}$, we obtain the Einstein relation:
+\begin{equation}
+    \sigma = e^2 N_s D
+\end{equation}
+
+\subsection{Drift or diffusion?}
+In the view of drift, the current comes from the entire sea of electrons, so that the conductivty in terms of mobility is given by
+\begin{equation}
+    \sigma = e n_s \mu, \quad \mu = \frac{v_d}{E} = \frac{e \tau_m}{m}
+\end{equation}
+In the view of diffusion, the current comes from the electrons in the energy range between $\mu_1$ and $\mu_2$. The conductivity in terms of diffuction coefficient is given before. Combining the two expressions for conductivity, we have
+\begin{equation}
+    e n_s \mu = e^2 N_s D \Rightarrow \frac{e D}{\mu} = \frac{n_s}{N_s} = E_f - E_s \Rightarrow D = \frac{1}{2} v_f^2 \tau_m
+\end{equation}
+The Einstein relation in this case is obtained by replacing $(E_f-E_s)$ with $k_B T$ for non-degenerate conductors.
+\begin{equation}
+    \frac{e D}{\mu} = k_B t
+\end{equation}
+
+\chapter{Conductance from transmission}
+\section{Resistance of a ballistic conductor}
+Consider a piece conductor connected to two large contact pads. If the dimensions of the conductor are large then its conductance would be given by $G=\sigma W/L$. If the length $L$ of the conductor is reduced to a value comparable to or smaller than the mean free path $l$, then the conductor becomes ballistic and its conductance is no longer given by the above formula. In a ballistic conductor, the resistance arising from the interface between the conductor, is called contact resistance($G_c^{-1}$).
+
+\section{Reflectionless contacts}
+The contact are reflectionless that the electrons can enter it from the conductor without suffering reflection. In reflectionless contacts, a simple situation is that $+k$ states in the conductor are occupied only by electrons originating in the left contact while $-k$ states are occupied only by electrons originating in the right contact. This is because the electrons in the left contact have positive velocities and can only enter the conductor in $+k$ states, while those in the right contact have negative velocities and can only enter the conductor in $-k$ states. The quasi-Fermi level $F^+$ for the $+k$ states is always equal to $\mu_1$ while that for the $-k$ states $F^-$ is always equal to $\mu_2$.
+
+\subsection{Calculating the current}
+Each transverse mode has a dispersion relation $E(N,k)$ with a cut-off energy $\epsilon_N=E(N,k=0)$, The number of transverse mode at energy $E$ is obtained by counting the number of modes having cut-off energies less than $E$:
+\begin{equation}
+    M(E) = \sum_N \theta(E - \epsilon_N)
+\end{equation}
+Consider a single transverse mode whose $+k$ states are occupied according to $f^+(E)$. The current carried by this mode is given by
+\begin{equation}
+    I^+_N = \frac{e}{L} \sum_k v f^+(E)= \frac{e}{L} \sum_k \frac{1}{\hbar} \frac{\partial E(N,k)}{\partial k} f^+(E)
+\end{equation}
+Assuming periodic boundary conditions and converting the sum over $k$ into an integral according to the usual prescription
+\begin{equation}
+    \sum_k \rightarrow g_s \frac{L}{2 \pi} \int \dd k
+\end{equation}
+we have
+\begin{equation}
+    I^+_N = \frac{2 e}{h} \int \frac{\partial E(N,k)}{\partial k} f^+(E) \dd k = \frac{2 e}{h} \int f^+(E) \dd E
+\end{equation}
+
+Extend this to all the transverse modes, we have
+\begin{equation}
+    I^+ = \frac{2 e}{h} \int M(E) f^+(E) \dd E
+\end{equation}
+
+\subsection{Contact resistance}
+Assuming that the number of modes $M$ is constant over the energy range $\mu_1 > E > \mu_2$, the total current is given by
+\begin{equation}
+    I = I^+ - I^- = \frac{2 e^2}{h} M \frac{(\mu_1 - \mu_2)}{\abs{e}} \Rightarrow G_c = \frac{2 e^2}{h} M
+\end{equation}
+Note that the contact conductance is dependent only on the number of transverse modes $M$ at the Fermi energy. The number of transverse modes $M$ can be estimated by periodic boundary conditions. The allowed values of $k_y$ are spaced by $2 \pi / W$, each value of $k_y$ corresponding to a distinct transverse mode. Thus the total number of transverse modes at the Fermi energy is given by
+\begin{equation}
+    M = Int\left[\frac{2 k_f}{2 \pi / W}\right] = Int\left[\frac{W}{\lambda_f/2}\right]
+\end{equation}
+where $Int[x]$ denotes the integer part of $x$.
+
+\section{Landauer formula}
+The Landauer formula relates the conductance of a conductor to its transmission properties $T$. For a conductor connected to two contacts, the conductance $G$ is given by
+\begin{equation}
+    G = \frac{e^2}{\pi \hbar} M T
+\end{equation}
+The influx of electrons from contact 1 is given by
+\begin{equation}
+    I^+_1=(2 e/h) M [\mu_1 - \mu_2]
+\end{equation}
+The outflux of electrons into contact 2 is given by
+\begin{equation}
+    I^+_2=(2 e/h) M T [\mu_2 - \mu_1]
+\end{equation}
+The rest of the flux is reflected back to contact 1:
+\begin{equation}
+    I^-_1=(2 e/h) M (1-T) [\mu_1 - \mu_2]
+\end{equation}
+The net current flowing at any point in the device is given by
+\begin{equation}
+    I = I^+_1 - I^-_1 = I^+_2 = \frac{e^2}{\pi \hbar} M T \frac{(\mu_1 - \mu_2)}{\abs{e}} \Rightarrow G = \frac{e^2}{\pi \hbar} M T
+\end{equation}
+The Landauer formula can be viewed as a mesoscopic version of the Einstein relation:
+\begin{equation}
+    G = e^2 N_s D \frac{W}{L} \rightleftarrows G = \frac{e^2}{\pi \hbar} M T
+\end{equation}
+with the conductivity replaced by the conductance, the density of states replaced by the number of transverse modes, and the diffusion constant replaced by the transmission probability:
+\begin{equation}
+    \sigma \rightleftarrows G, \quad N_s \rightleftarrows M, \quad D \rightleftarrows T
+\end{equation}
+
+\subsection{Ohm's law}
+The Landauer formula incorporates two properties of the resistance of small conductors, which are the length-independnt interface resistance with the contacts and the discrete steps related to the transverse modes in narrow conductors.For a wide conductor with width $W$, the number of transverse modes is $M \sim k_f W/\pi$, the conductance can be written as
+\begin{equation}
+    G = \frac{e^2}{\pi \hbar} M T = \frac{e^2}{\pi \hbar} \frac{k_f W}{\pi} T
+\end{equation}
+The transmission probability $T$ is given by
+\begin{equation}
+    T = \frac{L_0}{L + L_0}
+\end{equation}
+where $L_0$ is a characteristic length related to the mean free path.
+\begin{equation}
+    G = \frac{W}{L + L_0} e^2 N_s (v_f L_0/\pi)
+\end{equation}
+Identifying the diffusion coefficient as $D = v_f L_0/\pi$ and make use of the Einstein relation, we have
+\begin{equation}
+    G = \frac{\sigma W}{L + L_0} \Rightarrow G^{-1} = \frac{L+L_0}{\sigma W}
+\end{equation}
+We could write this as a series combination of the contact resistance and the interface resistance, which obeys Ohm's law:
+\begin{equation}
+    G_s^{-1} = \frac{L}{\sigma W}, \quad G_c^{-1} = \frac{L_0}{\sigma W}
+\end{equation}
+
+\subsection{Transmission probability}
+The transmission probability from a to b is $T_{ab}$, while the transmission probability around a and b are $T_a, T_b$, and the reflection probability $R_a = 1-T_a, R_b = 1-T_b$ . We can write
+\begin{equation}
+    T_{ab} = T_a T_b + T_a T_b R_a R_b + T_a T_b (R_a R_b)^2 +... = \frac{T_a T_b}{1 - R_a R_b}
+\end{equation}
+We can rewrite this in the form
+\begin{equation}
+    \frac{1-T_{ab}}{T_{ab}} = \frac{1-T_a}{T_a} + \frac{1-T_b}{T_b}
+\end{equation}
+The transmission probability $T(N)$ of $N$ scatters in series, each having a transmission probability $T$ is given by
+\begin{equation}
+    \frac{1-T(N)}{T(N)} = N \frac{1-T}{T} \Rightarrow T(N) = \frac{T}{N(1-T) + T}
+\end{equation}
+The number of scatters $N$ in a conductor of length $L$ can be written as $\nu L$ where $\nu$ is the linear density of scatters. Hence we can write
+\begin{equation}
+    T(L) = \frac{T}{\nu L (1-T) + T} = \frac{L_0}{L + L_0}, \quad L_0 = \frac{T}{\nu (1-T)}
+\end{equation}
+It is easy to see that the length $L_0$ is of the order of a mean free path. A mean free path is the average distance an electron can travel before it is scattering. Since the probability of scattering by an individual scatter is $(1-T)$ we can write(assuming $T \sim 1$)
+\begin{equation}
+    (1-T)\mu L_m \sim 1 \rightarrow L_m \sim \frac{1}{\mu (1-T)} \sim L_0
+\end{equation}
+
+\subsection{Energy distribution of electrons}
+At finite temperatures, the distribution fucntion $f^+(E)$ for the $+k$ states is given by(left of scatter)
+\begin{equation}
+    f^+(E) = \theta(\mu_1 - E)
+\end{equation}
+The distribution function $f^-(E)$ for the $-k$ states is given by(right of scatter)
+\begin{equation}
+    f^-(E) = \theta(\mu_2 - E)
+\end{equation}
+The situation is a little more complicated when we consider the occupation of the $-k$ states before the scatter or the $+k$ state after the scatter. All states are completely filled below $\mu_2$. But in the energy range between $\mu_1$ and $\mu_2$, the $+k$ states to the right of the scatter are filled only partially(with probability $T$) via transmitted electrons so that(near right)
+\begin{equation}
+    f^+(E) = \theta(\mu_2 - E) + T\left[\theta(\mu_1 - E) - \theta(\mu_2 - E)\right]
+\end{equation}
+Similarly, the $-k$ states to the left of the scatter are filled only partially(with probability $1-T$) via reflected electrons so that(near left)
+\begin{equation}
+    f^-(E) = \theta(\mu_2 - E) + (1-T)\left[\theta(\mu_1 - E) - \theta(\mu_2 - E)\right]
+\end{equation}
+Moving more than a few energy relaxation lengths away from the scatter, the electrons will settle down to lower energies and a Fermi distribution will be established \\
+(far left)
+\begin{equation}
+    f^-(E) = \theta(F' - E) 
+\end{equation}
+(far right)
+\begin{equation}
+    f^+(E) = \theta(F'' - E)
+\end{equation}
+The quasi-Fermi levels $F'$ and $F''$ can be found by noting that the total number of electrons must be conserved. Equating the total number of electrons on the left side before and after the scatter, we have
+\begin{equation}
+    F' = \mu_2 + (1-T)(\mu_1 - \mu_2)
+\end{equation}
+Similarly, equating the total number of electrons on the right side before and after the scatter, we have
+\begin{equation}
+    F'' = \mu_2 + T(\mu_1 - \mu_2)
+\end{equation}
+\subsection{Spational variation of the electrochemical potential}
+It is convenient to defien normalized potential $\mu^+$ and $\mu^-$ which are obtained by $F^+$ and $F^-$ by setiting $\mu_2 = 0$ and $\mu_1 = 1 V$:
+\begin{equation}
+    \mu^+ = 1 \quad \mathrm{(left)}, \quad \mu^+ = T \quad \mathrm(right)
+\end{equation}
+Similarly the normalized potential for the $-k$ states is given by
+\begin{equation}
+    \mu^- = 1 - T \quad \mathrm{(left)}, \quad \mu^- = 0 \quad \mathrm(right)
+\end{equation}
+There is a sharp drop across the scatter just expected for a localized resistance. The nomalized potential drop across the scatter is equal to $(1-T)$ for both the positive and negative $k$-state. The actual potential drop $eV_s$ is simply the normalized drop multiplied by the total applied voltage $\mu_1-\mu_2$:
+\begin{equation}
+    e V_s = (1-T)(\mu_1 - \mu_2)
+\end{equation}
+The rest if the applied bias voltage $T(\mu_1 - \mu_2)$ is dropped at the interfaces with the contacts. These are prescisely the potential drops we would expect for a current
+\begin{equation}
+    I = \frac{e^2}{\pi \hbar} M T \frac{(\mu_1 - \mu_2)}{\abs{e}}
+\end{equation}
+flowing through the scatterer resistance in series with the contact resistance:
+\begin{equation}
+    G_s^{-1} = \frac{\pi \hbar}{e^2 M}\frac{1-T}{T}, \quad G_c^{-1} = \frac{\pi \hbar}{e^2 M} (1 - T)
+\end{equation}
+\subsection{heat dissipation}
+The evolution of the electrorn energy distribution requires the dissipation of heat and it takes place over a distance of the order of an energy relaxatio length from the scatter. The heat dissipation $P_D$ is given by the spatial gradient of the energy current $I_U$:
+\begin{equation}
+    P_D = \frac{\dd}{\dd z} I_{U}
+\end{equation}
+The energy current $I_U$ can be calculated from the energy disdribution $i{E}$ of the current that flows at any spatial location.
+\begin{equation}
+    I_U = \frac{1}{e} \int E i(E) \dd E
+\end{equation}
+Noting that the net current $I$ is given by
+\begin{equation}
+    I = \frac{1}{e} \int i(E) \dd E
+\end{equation}
+we could define an average energy $U$ of the current as
+\begin{equation}
+    U = \frac{I_U}{I} = \frac{\int E i(E) \dd E}{\int i(E) \dd E}
+\end{equation}
+The heat dissipation can be written as
+\begin{equation}
+    P_D = I \frac{\dd U}{\dd z}
+\end{equation}
+The current per unit energy given by
+\begin{equation}
+    i(E) = \frac{2 e M}{h}\left[f^+(E) - f^-(E)\right]
+\end{equation}
+
+\section{Buttiker formula}
+The Buttiker formula is a generalization of the Landauer formula to multi-terminal conductors. Consider a conductor connected to several contacts. The current $I_p$ flowing into contact $p$ is extended from the two-terminal linear response formula
+\begin{equation}
+    I = \frac{2 e}{h} \overline{T} \left[ \mu_1 - \mu_2 \right]
+\end{equation}
+by summing over all the terminals (indexed by $p,q$) as fllows
+\begin{equation}
+    I_p = \frac{2 e}{h} \sum_q \left[ \overline{T}_{q \leftarrow p}\mu_p - \overline{T}_{p \leftarrow q}\mu_q \right]
+\end{equation}
+We can rewrite this in the form (with $V = \mu/e$)
+\begin{equation}
+    I_p = \sum_q \left[ G_{qp} V_p - G_{pq} V_q \right], \quad G_{pq} = \frac{2 e^2}{h} \overline{T}_{p \leftarrow q}
+\end{equation}
+In order to ensure that the current is zero when all the potentials are equal:
+\begin{equation}
+    \sum_q G_{pq} = \sum_q G_{qp}
+\end{equation}
+Thus the equation of $I_p$ can be written as
+\begin{equation}
+    I_p = \sum_q G_{pq} (V_p - V_q)
+\end{equation}
+That beacuse the current flowing into contact $p$ is the sum of the currents flowing between contact $p$ and all other contacts $q$. The conductance coefficient ($G$) also obeys the relation which can be proved for coherent transport using properties of the $S$-matrix in next Chapter.($B$ is the magnetic field)
+\begin{equation}
+    \left[G_{qp}\right]_{+B} = \left[G_{pq}\right]_{-B}
+\end{equation}
+The potential at a voltage probe can be written as (setting $I_p = 0$)
+\begin{equation}
+    V_p = \frac{\sum_{q \neq p} G_{pq} V_q}{\sum_{q \neq p} G_{pq}}
+\end{equation}
+\subsection{Three-terminal conductor}
+Consider a three-terminal conductor with contacts 1, 2, and 3. To calculate the resistance $R_{3t} = V/I$
+\begin{equation}
+    \begin{pmatrix}
+        I_1 \\
+        I_2 \\
+        I_3
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        G_{12} + G_{13} & -G_{12} & -G_{13} \\
+        -G_{21} & G_{21} + G_{23} & -G_{23} \\
+        -G_{31} & -G_{32} & G_{31} + G_{32}
+    \end{bmatrix}
+    \begin{pmatrix}
+        V_1 \\
+        V_2 \\
+        V_3
+    \end{pmatrix}
+\end{equation}
+The sum rules ensure that the Kirchhoff's current law is satisfied. Setting $V_3 = 0$ and truncating the third row and third column, we have
+\begin{equation}
+    \begin{pmatrix}
+        I_1 \\
+        I_2
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        G_{12} + G_{13} & -G_{12} \\
+        -G_{21} & G_{21} + G_{23}
+    \end{bmatrix}
+    \begin{pmatrix}
+        V_1 \\
+        V_2
+    \end{pmatrix}
+\end{equation}
+Inverting the matrix, we have
+\begin{equation}
+    \begin{pmatrix}
+        V_1 \\
+        V_2
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        R_{11} & R_{12} \\
+        R_{21} & R_{22}
+    \end{bmatrix}
+    \begin{pmatrix}
+        I_1 \\
+        I_2
+    \end{pmatrix}
+    , \quad
+    \begin{bmatrix}
+        R_{11} & R_{12} \\
+        R_{21} & R_{22}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        G_{12} + G_{13} & -G_{12} \\
+        -G_{21} & G_{21} + G_{23}
+    \end{bmatrix}^{-1}
+\end{equation}
+The resistance $R_{3t}$ measured in the configureation shown in Fig.2.4.2a is given by
+\begin{equation}
+    R_{3t} = \left[\frac{V_2}{I_1}\right]_{I_2=0} = R_{21}
+\end{equation}
+The resistance $R_{3t}$ measured in the configureation shown in Fig.2.4.2b is given by
+\begin{equation}
+    R_{3t}' = \left[\frac{V_1}{I_2}\right]_{I_1=0} = R_{12}
+\end{equation}
+\subsection{Four-terminal conductor}
+Setting the voltage at one of the terminals ($V_4$) equal to zero, we have
+\begin{equation}
+    \begin{pmatrix}
+        I_1 \\ 
+        I_2 \\
+        I_3 
+    \end{pmatrix}
+    \begin{bmatrix}
+        G_{12} + G_{13} + G_{14} & -G_{12} & -G_{13} \\
+        -G_{21} & G_{21} + G_{23} + G_{24} & -G_{23} \\
+        -G_{31} & -G_{32} & G_{31} + G_{32} + G_{34}
+    \end{bmatrix}
+    \begin{pmatrix}
+        V_1 \\
+        V_2 \\
+        V_3
+    \end{pmatrix}
+\end{equation}
+Inverting the matrix, we have
+\begin{equation}
+    \begin{pmatrix}
+        V_1 \\
+        V_2 \\
+        V_3
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        R_{11} & R_{12} & R_{13} \\
+        R_{21} & R_{22} & R_{23} \\
+        R_{31} & R_{32} & R_{33}
+    \end{bmatrix}
+    \begin{pmatrix}
+        I_1 \\
+        I_2 \\
+        I_3
+    \end{pmatrix}
+\end{equation}
+\begin{equation}
+    \begin{bmatrix}
+        R_{11} & R_{12} & R_{13} \\
+        R_{21} & R_{22} & R_{23} \\
+        R_{31} & R_{32} & R_{33}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        G_{12} + G_{13} + G_{14} & -G_{12} & -G_{13} \\
+        -G_{21} & G_{21} + G_{23} + G_{24} & -G_{23} \\
+        -G_{31} & -G_{32} & G_{31} + G_{32} + G_{34}
+    \end{bmatrix}^{-1}
+\end{equation}
+The resistance $R_{4t}$ measured in the configureation shown in Fig.2.4.3a is given by
+\begin{equation}
+    R_{4t} = \frac{V}{I} = \left[\frac{V_2-V_3}{I_1}\right]_{I_2=I_3=0} = R_{21}-R_{31}
+\end{equation}
+while the resistance $R_{4t}'$ measured in the configureation shown in Fig.2.4.3b is given by
+\begin{equation}
+    R_{4t}' = \frac{V'}{I'} = \left[\frac{V_1}{I_2}\right]_{I_1=0, I_2=-I_3} = R_{12}-R_{13}
+\end{equation}
+\section{Non-zero temperature and bias}
+In zero temperature, we assume that the current was carried by a singel energy channel around the Fermi energy. This allowed us to write the current as
+\begin{equation}
+    I = \frac{2 e}{h} \overline{T} (\mu_1 - \mu_2)
+\end{equation}
+where $\overline{T}$ denotes the product of the number of modes $M$ and the transmission probability per mode $T$ at the Fermi energy (assumed constant over the range $\mu_1$ to $\mu_2$). However, in finite temperatures, the electron energy distribution is broadened over an energy range of several $k_B T$ around the Fermi energy. The influx of electrons per unit energy from lead 1 is given by
+\begin{equation}
+    i_1^+(E) = \frac{2 e}{h} M f_1(E)
+\end{equation}
+while the influx from lead 2 is given by ($M'$ is the number of modes in lead 2)
+\begin{equation}
+    i_2^-(E) = \frac{2 e}{h} M' f_2(E)
+\end{equation}
+The outflux from lead 2 is written as 
+\begin{equation}
+    i_2^+(E) = T i_1^+(E) + (1-T') i_2^-(E)
+\end{equation}
+while the outflux from lead 1 is written as
+\begin{equation}
+    i_1^-(E) = (1-T) i_1^+(E) + T' i_2^-(E)
+\end{equation}
+The net current $i(E)$ flowing at any point in the device is given by
+\begin{equation}
+    \begin{aligned}
+        i(E) 
+        & = i_1^+(E) - i_1^-(E) \\
+        & = i_2^+(E) - i_2^-(E) \\
+        & = T i_1^+(E)-T'i_2^-(E) \\
+        & = \frac{2 e}{h} \left[ T(E) M(E) f_1(E) - T'(E) M'(E) f_2(E) \right]
+    \end{aligned}
+\end{equation}
+Defining the transmission function as $\overline{T}(E) = T(E) M(E)$ we can write
+\begin{equation}
+    i(E) = \frac{2 e}{h} \left[ \overline{T}(E) f_1(E) - \overline{T}'(E) f_2(E) \right]
+\end{equation}
+The total current $I$ is obtained by integrating over all energies:
+\begin{equation}
+    \begin{aligned}
+        I
+        & = \int i(E) \dd E \\
+        & = \frac{2 e}{h} \int \left[ \overline{T}(E) f_1(E) - \overline{T}'(E) f_2(E) \right] \dd E \\
+        & = \frac{2 e}{h} \int \overline{T}(E) \left[ f_1(E) - f_2(E) \right] \dd E
+    \end{aligned}
+\end{equation}
+Assuming that there is no inelastic scattering inside the device, then it can be shown that $\overline{T}(E) = \overline{T}'(E)$.
+
+\subsection{Linear response}
+For small deviations from equilibrium, the current is proportional to the applied bias voltage.
+\begin{equation}
+    \delta I = \frac{2 e}{h} \int \left( \left[ \overline{T}(E) \right]_{eq} \delta[f_1-f_2] + [f_1-f_2]_{eq} \delta \left[ \overline{T}(E) \right] \right) \dd E
+\end{equation}
+The second term is clearly zero. We can simplify the first term by using a Taylor's series expansion to write
+\begin{equation}
+    \delta[f_1 - f_2] = [\mu_1 - \mu_2] \left( -\frac{\partial f_0}{\partial E} \right)_{eq}
+\end{equation}
+where $f_0(E)$ is the equilibrium Fermi distribution function. 
+\begin{equation}
+    f_0(E) = \left[ \frac{1}{\exp \left[(E-\nu)/k_B T\right] + 1}  \right]_{\mu = E_f}
+\end{equation}
+Thus we have
+\begin{equation}
+    G = \frac{\delta I}{(\mu_1 - \mu_2)/e} = \frac{2 e^2}{h} \int \left( -\frac{\partial f_0}{\partial E} \right)_{eq} \left[ \overline{T}(E) \right]_{eq} \dd E
+\end{equation}
+At low temperatures, the derivative of the Fermi function approaches a delta function centered at the Fermi energy:
+\begin{equation}
+    f_0(E) \approx \theta(E_f - E) \Rightarrow -\frac{\partial f_0}{\partial E} \approx \delta(E - E_f)
+\end{equation}
+Thus we have(drop the subscript 'eq' for clarity)
+\begin{equation}
+    G = \frac{2 e^2}{h} \overline{T}(E_f)
+\end{equation}
+\subsection{When is the response linear?}
+The response is linear regardless of the temperature if the transmission functin $\overline{T}(E)$ is approximately constant over over the energy range where transport occurs, and can be assumed to unaffeected by the applied bias voltage. Thus we have
+\begin{equation}
+    I = \frac{2 e}{h} \overline{T} \int \left[ f_1(E) - f_2(E) \right] \dd E
+\end{equation}
+at low temperatures it is easy to see that
+\begin{equation}
+    \int \left[ f_1(E) - f_2(E) \right] \dd E = \mu_1 - \mu_2
+\end{equation}
+since $f_1(E) \approx \theta(\mu_1 - E)$ and $f_2(E) \approx \theta(\mu_2 - E)$. Thus we obtain a linear relationship between the current and the applied bias voltage:
+\begin{equation}
+    I = \frac{2 e}{h} \overline{T} (\mu_1 - \mu_2)
+\end{equation}
+for arbitrary temperatures, as long as the transimission function is independent of energy and unaffected by the applied bias voltage. We can arrive a general criterion for linear response by rewriting the current as 
+\begin{equation}
+    I = \frac{1}{e} \int^{\mu_1}_{\mu_2} \hat{G}(E') \dd E'
+\end{equation}
+where the conductance function is defined as
+\begin{equation}
+    \hat{G}(E) = \frac{2 e^2}{h} \int \overline{T}(E) F_T(E - E')dE 
+\end{equation}
+$F_T(E)$ being the thermal broadening function
+\begin{equation}
+    F_T(E) = -\frac{\dd}{\dd E} \left[ \frac{1}{\exp (E/k_B T) + 1} \right] = \frac{1}{4 k_B T} \sech^2 \left(\frac{E}{2 k_B T} \right) 
+\end{equation}
+The current is the linear response of the bias voltage if the conductance function $\hat{G}(E)$ is approximately constant over the energy range $\mu_1$ to $\mu_2$. Thus the current is wrriten as
+\begin{equation}
+    I = \hat{G}(E_f) \frac{(\mu_1 - \mu_2)}{e}
+\end{equation}
+where the conductance is given by
+\begin{equation}
+    G = \hat{G}(E_f) = \frac{2 e^2}{h} \int \overline{T}(E) F_T(E - E_f) \dd E
+\end{equation}
+For the transimssion function $\overline{T}(E)$ often changes rapidly with energy in low temperatures, the response is linear as long as the bias is much less than $k_B T$.
+\subsection{Multi-terminal conductors}
+For multi-terminal devices, the current can be written as
+\begin{equation}
+    I_p = \int i_p(E) \dd E, \quad i_p(E) = \frac{2 e}{h} \sum_q \left[ \overline{T}_{qp}(E) f_p(E) - \overline{T}_{pq}(E) f_q(E) \right]
+\end{equation}
+Since there can be no current flowing at equilibrium, $f_p(E) = f_q(E) = f_0(E)$, we must have $\sum_q \overline{T}_{qp}(E) = \sum_q \overline{T}_{pq}(E)$. Thus we can rewrite the current as
+\begin{equation}
+    I_p = \frac{2 e}{h} \sum_q \overline{T}_{pq}(E) \left[ f_p(E) - f_q(E) \right]
+\end{equation}
+A floating current, i.e., $I_p = \int i_p(E) \dd E = 0$. We can linearize the current for small deviations from equilibrium
+\begin{equation}
+    I_p = \sum_q G_{pq} (V_p - V_q), \quad G_{pq} = \frac{2 e^2}{h} \int \overline{T}_{pq}(E) \left( -\frac{\partial f_0}{\partial E} \right) \dd E
+\end{equation}
+at low temperatures, we have
+\begin{equation}
+    G_{pq} = \frac{2 e^2}{h} \overline{T}_{pq}(E_f)
+\end{equation}
+\section{Exclusion principle?}
+To modify the current expression to account for the exclusion principle
+\begin{equation}
+    \begin{aligned}
+        i_p(E) 
+        & = \frac{2 e}{h} \sum_q \left[ \overline{T}_{qp}(E) f_p(E) [1 - f_q(E)] - \overline{T}_{pq}(E) f_q(E) [1 - f_p(E)] \right] \\
+        & = \frac{2 e}{h} \sum_q \left(\left[ \overline{T}_{qp}(E) f_p(E) - \overline{T}_{pq}(E) f_q(E) \right] - \left[ \overline{T}_{qp}(E) - \overline{T}_{pq}(E) \right]  f_q(E) f_p(E) \right)
+    \end{aligned}
+\end{equation}
+\subsection{Scattering states}
+Instinctively, we tend to think of the current as arising from the electronic transitions between an eigenstate localized in lead p and an eigenstate localized in q
+\begin{equation}
+    \ket{q,k} \equiv \sin(k x_p) \rightarrow \ket{p,k'} \equiv \sin(k' x_q)
+\end{equation}
+The wavefunction in lead p due to a scattering state $(q,k)$ is given by ($\delta_{pq} = 1$ if $p=q$, zero otherwise)
+\begin{equation}
+    \Psi_p(q) = \delta_{pq} \chi^+_p(y_p)\exp\left( ik^+x_p  \right) + s'_{pq} \chi^-_p(y_p)\exp\left( ik^-x_p  \right)
+\end{equation}
+where $\chi^+_p$ and $\chi^-_p$ are the transverse wavefunctions for the incident and scattered waves respectively. If the vector potential is zero in the lead then the two fucntions are identical and $k^-=-k^+$. A scatter state $(q,k)$ gives rise to a current $i_p(q)$ per unit energy in lead p which is given by
+\begin{equation}
+    i_p(q) = \frac{2 e}{h}(\delta_{pq} - T_{pq})
+\end{equation}
+Hence a scattering state $(q,k)$ occupied with probability $f_q(E)$ gives rise to a current in terminal p can be written as
+\begin{equation}
+    \begin{aligned}
+        I_p 
+        & = \int \sum_q f_q(E) i_p(q) \dd E \\
+        & = \frac{2 e}{h} \int \sum_q f_q(E) \left( \delta_{pq} - T_{pq} \right) \dd E
+    \end{aligned}
+\end{equation}
+For coherent transport, the transimission coefficient obey the sum rule
+\begin{equation}
+    \sum_q T_{pq} = \sum_q T_{qp} = 1
+\end{equation}
+Thus we can rewrite the current as
+\begin{equation}
+    I_p = \frac{2 e}{h} \int \sum_q T_{pq} (f_p(E) - f_q(E)) \dd E
+\end{equation}
+Consider multiple modes in each lead, we obtain the same expression with the transimission coefficient replaced by the transmission function $\overline{T}_{pq}(E)$, by summing over all the modes in each lead.
+\begin{equation}
+    \overline{T}_{pq}(E) = \sum_{m \in p} \sum_{n \in q} T_{mn}
+\end{equation}
+\subsection{Can scattering states be defined in non-zero magnetic fields?}
+In the presence of magnetic field, We need to choose our gauge such that the vector potential has the form
+\begin{equation}
+    \vec{A} \sim \hat{x}_q B y_q
+\end{equation}
+in every lead q. It has been shown that this can be done even for conductors with multiple leads arranged arbitrarily.
+\subsection{Are different transverse modes independent?}
+The general expressioin for calculating the current density $J$ from the wavefunction $\Psi$ is given by
+\begin{equation}
+    \vec{J} = \frac{e}{2 m}\left( \Psi (\hat{\vec{p}}-e\vec{A})\Psi^* + \Psi^*(\hat{\vec{p}}-e\vec{A}) \Psi \right)
+\end{equation}
+To obtain the total current carried by a lead we integrate the longitudinal($x$-directed) current over the transverse coordinate ($y$):
+\begin{equation}
+    I = \int \dd y J_x(y) = \frac{e}{2 m} \int \left( \Psi (\hat{p}_x - e A_x)\Psi^* + \Psi^*(\hat{p}_x - e A_x) \Psi\right) \dd y 
+\end{equation}
+If the wavefunction consists of an incident wave
+\begin{equation}
+    \Psi_i = \frac{1}{\sqrt{L}} \chi^+(y) \exp(ik^+ x)
+\end{equation}
+then the current is given by (assuming $\chi^+(y)$ is real)
+\begin{equation}
+    I_i = \frac{e}{m L} \int \chi^{+}(y) (\hbar k^+ - e A_x) \chi^+(y) \dd y
+\end{equation}
+On the other hand, if the wavefunction consists of only a scattered wave of amplitude $s'$
+\begin{equation}
+    \Psi_s = \frac{s'}{\sqrt{L}} \chi^-(y) \exp(ik^- x)
+\end{equation}
+then the current is given by
+\begin{equation}
+    I_s = \frac{e |s'|^2}{m L} \int \chi^{-}(y) (\hbar k^- - e A_x) \chi^-(y) \dd y
+\end{equation}
+But if the wavefunction consists of both incident and scattered waves
+\begin{equation}
+    \Psi = \frac{1}{\sqrt{L}} \left[ \chi^+(y) \exp(ik^+ x) + s' \chi^-(y) \exp(ik^- x) \right]
+\end{equation}
+Assuming that the current is given by $I = I_i - I_s$, a direct evaluation of the current would give rise to cross-terms of the form
+\begin{equation}
+    \frac{e}{m L}\int \left[\chi^+\left( \frac{\hbar(k^+ + k^-)}{2}-eA_x \right)\chi^- \right] \dd y
+\end{equation}
+These cross-terms vanish by virtue of the following orthogonality relation between the transverse wavefunctions:
+\begin{equation}
+    \int \chi^+(y) \left( \frac{\hbar (k+k')}{2} - e A_x \right) \chi^-(y) \dd y = 0
+\end{equation}
+To proof this, we start from the transverse Schrodinger equation for the two modes:
+\begin{equation}
+    \left[ \frac{1}{2 m} \left( \hbar k^{\pm} - e A_x \right)^2 + V(y) \right] \chi^{\pm}(y) = E_t^{\pm} \chi^{\pm}(y)
+\end{equation}
+Multiplying the equation for $\chi^+$ by $\chi^-$ and the equation for $\chi^-$ by $\chi^+$, subtracting the two resulting equations, and integrating over $y$, we obtain
+\begin{equation}
+    (E_t^+ - E_t^-) \int \chi^+(y) \chi^-(y) \dd y = \frac{\hbar}{m} (k^+ - k^-) \int \chi^+(y) \left( \frac{\hbar (k^+ + k^-)}{2} - e A_x \right) \chi^-(y) \dd y
+\end{equation}
+The left-hand side is zero because of the orthogonality of the transverse wavefunctions corresponding to different eigenvalues. The right-hand side is zero unless $k^+ = k^-$. Thus we have proved the orthogonality relation.
+\subsection{Non-coherent transport}
+The key insight is an observation due to Buttiker that a voltage probe acts as a phase-breaking scatterer. This can be understood by considering the current flow from terminal 1 to 2 in a device having a voltage probe in between as shown in Fig.2.6.2. We can calculate the $S$-matrix for such a device using the Schrodinger equation if we assume that transport is fully coherent between any pair of terminals. However, the voltage probe is adjusted such that no net current flows into or out of probe. This means that any electron entering probe from the device must be replaced by another electron injected back into the device from probe. Since there is no phase relationship between these two electrons, the effect is to randomize the phase of the electron wavefunction. Thus the voltage probe acts as a phase-breaking scatterer. We can reverse this argument to conclude that phase-breaking scatterers can be simulated by introducing conceptual voltage probes where none exist in the real structure. \\
+A conceptual probe with the appropriate properties can thus be used to simulate the effect of phase-breaking processes. A partially coherent conductor or an incoherent conductor can be visualized as a fully coherent conductor with a conceptual probe stuck to it. The current in such a structure can be described by an equation of the form
+\begin{equation}
+    i_p(E) = \frac{2 e}{h} \sum_q \overline{T}_{pq}(E)\left[ f_p(E) - f_q(E) \right] + \frac{2 e}{h} \overline{T}_{p\phi}(E) \left[ f_p(E) - f_{\phi}(E) \right]
+\end{equation}
+where the index $q$ runs over all the real terminals while the index $\phi$ denotes a fictitious phase-breaking probe attached to the coonductor. The current at the fictitious probe is given by
+\begin{equation}
+    i_{\phi}(E) = \frac{2 e}{h} \sum_q \overline{T}_{\phi q}(E) \left[ f_{\phi}(E) - f_q(E) \right]
+\end{equation}
+Express the distribution function $f_{\phi}(E)$ at the fictitious probe in terms of the distribution functions at the real terminals by setting $i_{\phi}(E) = 0$:
+\begin{equation}
+    f_{\phi}(E) = \frac{1}{R_\phi} \left( i_\phi + \sum_q \overline{T}_{\phi q} f_q \right), \quad R_\phi \equiv \sum_q \overline{T}_{\phi q}
+\end{equation}
+Substituting this into the expression for $i_p(E)$, we have
+\begin{equation}
+    i_p(E) = \frac{2 e}{h} \sum_q \overline{T}_{pq}^{eff}[f_p-f_q]-\frac{2 e}{h} \left[ \overline{T}_{p\phi}/\overline{R_\phi} \right]i_\phi
+\end{equation}
+The net current of fictitious probe integrated over all energies is zero
+\begin{equation}
+    \int i_{\phi}(E) \dd E = 0
+\end{equation}
+\section{Equilibrium Current Fluctuations}
+We have seen that the conductance is given by ($f_0(E)$ is the equilibrium Fermi distribution function)
+\begin{equation}
+    \begin{aligned}
+        G 
+        & = \frac{2 e^2}{h} \int \overline{T}(E) \left( -\frac{\partial f_0}{\partial E} \right) \dd E \\
+        & = \frac{2 e^2}{h k_B T} \int \overline{T}(E) f_0(E) [1-f_0(E)] \dd E
+    \end{aligned}
+\end{equation}
+We could rewrite this in the form
+\begin{equation}
+    G = \frac{\abs{e} I_{eq}}{k_B T}
+\end{equation}
+where $I_{eq}$ is defined as
+\begin{equation}
+    I_{eq} = \frac{2\abs{e}}{h} \int \overline{T}(E) f_0(E) [1-f_0(E)] \dd E
+\end{equation}
+In any conductor there are current fluctuations $I_{eq}$ in both directions which balance out on the average at equilibrium. A small bias $\Delta \mu$ increases the flow in one direction to $I_{eq} + \Delta I$ such that
+\begin{equation}
+    \frac{\Delta I}{I_{eq}} = \frac{\Delta \mu}{k_B T} \Rightarrow G = \frac{\Delta I}{\Delta \mu / \abs{e}} = \frac{\abs{e} I_{eq}}{k_B T}
+\end{equation}
+This result seems to be quite general. An example of this is a p-n junction diode where the current-voltage characteristic is given by
+\begin{equation}
+    I = I_{eq}\left[ \exp \left( \frac{e V}{k_B T} \right) - 1 \right] \Rightarrow G = \frac{\dd I}{\dd V}\Bigg|_{V=0} = \frac{e I_{eq}}{k_B T}
+\end{equation}
+which suggests an intereseting relationship between the Landauer formula and the Nyquist-Johnson formula which relates the conductance to the correlation fuction for the equilibrium noise current:
+\begin{equation}
+    G = \frac{1}{2 k_B T} \int_{-\infty}^{\infty} \langle I(t_0+t) I(t_0) \rangle_{eq} \dd t
+\end{equation}
+The angle-brakets denote averaging over times $t_0$, or equalently, averaging over an ensemble of systems at equilibrium, which are consistent only if
+\begin{equation}
+    \int^{\infty}_{-\infty} \langle I(t_0+t) I(t_0) \rangle_{eq} \dd t = 2 \abs{e} I_{eq}
+\end{equation}
+which seems reasonable if we view the equilibrium noise as the shot noise due to independent uncorrelated equilibrium current $I_{eq}$ flowing in either direction.
+\section{Summary}
+The basic results of the Landauer-Buttiker formalism for coherent transport can be summarized here for convenience:
+\begin{equation}
+    I_p = \int i_p(E) \dd E, \quad i_p(E) = \frac{2 e}{h} \sum_q \overline{T}_{pq}(E) \left[ f_p(E) - f_q(E) \right]
+\end{equation}
+Here $f_p(E)$ is the Fermi distribution function in terminal P
+\begin{equation}
+    f_p(E) = \frac{1}{\exp \left[(E - \mu_p)/k_B T \right] + 1}
+\end{equation}
+and $\overline{T}_{pq}(E)$ is the transmission function from terminal q to p. The transimission function obeys the sum rule
+\begin{equation}
+    \sum_q \overline{T}_{pq}(E) = \sum_q \overline{T}_{qp}(E)
+\end{equation}
+If the bias voltage is small such that
+\begin{equation}
+    \Delta \mu = \epsilon_c + (\mbox{a few } k_B T)
+\end{equation}
+then we can linearize the current to obtain
+\begin{equation}
+    I_p = \sum_q G_{pq} (V_p - V_q), \quad G_{pq} = \frac{2 e^2}{h} \int \overline{T}_{pq}(E) \left( -\frac{\partial f_0}{\partial E} \right) \dd E
+\end{equation}
+where $f_0(E)$ is the equilibrium Fermi distribution function. At low temperatures, the conductance coefficients reduce to
+\begin{equation}
+    G_{pq} = \frac{2 e^2}{h} \overline{T}_{pq}(E_f)
+\end{equation}
+
+\chapter{Transmission function, S-matrix, and Green's functions}
+\section{Transmission function and the S-matrix}
+A coherent conductor can be characteristized at each energy by an S-matrix which relates the outgoing wave amplitudes to the incoming wave amplitudes at the different leads. To be specific, if there is a total of three modes in the leads as shown in Fig.3.1.1, we can write
+\begin{equation}
+    \begin{pmatrix}
+        b_1 \\
+        b_2 \\
+        b_3
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        s_{11} & s_{12} & s_{13} \\
+        s_{21} & s_{22} & s_{23} \\
+        s_{31} & s_{32} & s_{33}
+    \end{bmatrix}
+    \begin{pmatrix}
+        a_1 \\
+        a_2 \\
+        a_3
+    \end{pmatrix}
+\end{equation}
+where $a_i$ and $b_i$ are the incoming and outgoing wave amplitudes in mode i respectively. At any given energy E, we will denote the number of propagating modes in lead p by $M_p(E)$. The total number of modes in each lead
+\begin{equation}
+    M_T(E) = \sum_p M_p(E)
+\end{equation}
+The scattering matrix is dimensions $M_T \times M_T$. We can calculate the S-matrix starting from the (effective mass) Schrodinger equation
+\begin{equation}
+    \left[E_s + \frac{(\ii \hbar \nabla + e\vec{A})^2}{2 m} + U(x,y) \right] \Psi(x,y) = E \Psi(x,y)
+\end{equation}
+The transmission probability $T_{nm}$ is obtained by taking the squared magniitude of the corresponding element of the S-matrix:
+\begin{equation}
+    T_{m\leftarrow n} = \abs{s_{m\leftarrow n}}^2
+\end{equation}
+The transmission function $\overline{T}_{pq}(E)$ is obtained by summing over all modes from lead q to lead p:
+\begin{equation}
+    \overline{T}_{p\leftarrow q}(E) = \sum_{m \in q} \sum_{n \in p} T_{n \leftarrow m}
+\end{equation}
+\subsection{Unitarity}
+In order ensure current conservation, the S-matrix must be unitary. We can write in matrix notation
+\begin{equation}
+    \{b\} = [S] \{a\}
+\end{equation}
+Where the matrix $[S]$ has dimensions $M_T \times M_T$, while $M_T$ being the total number of modes in all the leads, and $\{a\}$ and $\{b\}$ are column vectors representing the incoming and outgoing wave amplitudes in the different modes in the leads. Assuming that the incoming and outgoing currents in a particular mode m are proportional to the squared magnitudes of the corresponding mode amplitudes $a_m$ and $b_m$. Current conservation requires that the total incoming current equals the total outgoing current:
+\begin{equation}
+    \sum_m \abs{a_m}^2 = \sum_m \abs{b_m}^2 \Rightarrow \{a\}^\dagger \{a\} = \{b\}^\dagger \{b\}
+\end{equation}
+Since $\{b\} = [S] \{a\}$, we have
+\begin{equation}
+    \{a\}^\dagger \{a\} = \{a\}^\dagger [S]^\dagger [S] \{a\}
+\end{equation}
+This must hold for any arbitrary vector $\{a\}$, which implies that
+\begin{equation}
+    [S]^\dagger [S] = [I]
+\end{equation}
+So that in terms of the elements of the S-matrix, we have
+\begin{equation}
+    \sum_{m=1}^{M_T} \abs{s_{mn}}^2 = 1 = \sum_{m=1}^{M_T} \abs{s_{nm}}^2
+\end{equation}
+\subsection{An import point}
+The current associated with a scattered wave is proportional to the square of the wavefunction multiplied by the velocity. It is customary to define the S-matrix in terms of the 'current amplited' which is equal to the wave amplitude times the square root of the velocity. Instead we could define a matrix $[S']$ in terms of the wave amplitudes directly. The two matrices are related by
+\begin{equation}
+    s'_{mn} = s_{mn} \sqrt{\frac{v_m}{v_n}}
+\end{equation}
+But the matrix $[S']$ is not unitary. Using the unitarity of $[S]$, we can show that
+\begin{equation}
+    \sum_q \overline{T}_{qp} = \sum_{n \in p} \sum_{m=1}^{M_T} T_{mn} = \sum_{n \in p} \sum_{m=1}^{M_T} \abs{s_{mn}}^2 = \sum_{n \in p} 1 = M_p
+\end{equation}
+\begin{equation}
+    \sum_q \overline{T}_{pq} = \sum_{n \in p} \sum_{m=1}^{M_T} T_{nm} = \sum_{n \in p} \sum_{m=1}^{M_T} \abs{s_{nm}}^2 = \sum_{m \in p} 1 = M_p
+\end{equation}
+Hence the following sum rule is always satisfied by the transimission function:
+\begin{equation}
+    \sum_q \overline{T}_{pq}(E) = \sum_q \overline{T}_{qp}(E) = M_p(E)
+\end{equation}
+where $M_p(E)$ is the number of propagating modes in lead p at energy E. For a device with N leads we can write down the transmission function $\overline{T}$ in the form of an $N \times N$ matrix. Assuming $N = 3$ (to be specific), we have
+\begin{equation}
+    \begin{matrix}
+        \overline{T}_{pq}(E): & q=1 & q=2 & q=3 & \\
+        p=1 & \overline{T}_{11} & \overline{T}_{12} & \overline{T}_{13} & SUM = M_1 \\
+        p=2 & \overline{T}_{21} & \overline{T}_{22} & \overline{T}_{23} & SUM = M_2 \\
+        p=3 & \overline{T}_{31} & \overline{T}_{32} & \overline{T}_{33} & SUM = M_3 \\
+        SUM= & M_1 & M_2 & M_3 &
+    \end{matrix}
+\end{equation}
+The sum rules requires that the elements in each row and each column add up to the number of modes for that terminal. It is interesting to note that the sum rules imply that for 2D devices the transmission function is always reciprocal, even if a magnetic field is present. That is, $\overline{T}_{12}(E) = \overline{T}_{21}(E)$. To see this, consider a two-terminal device.
+\begin{equation}
+    \begin{matrix}
+        \overline{T}_{pq}(E): & q=1 & q=2 & \\
+        p=1 & \overline{T}_{11} & \overline{T}_{12} & SUM = M_1 \\
+        p=2 & \overline{T}_{21} & \overline{T}_{22} & SUM = M_2 \\
+        SUM= & M_1 & M_2 &
+    \end{matrix}
+\end{equation}
+Since $\overline{T}_{11} + \overline{T}_{12} = M_1 = \overline{T}_{21} + \overline{T}_{11}$, we must have $\overline{T}_{12} = \overline{T}_{21}$.
+\subsection{Sum rule for the conductance matrix}
+We can obtain the following sum rules for the conductance matrix:
+\begin{equation}
+    \begin{aligned}
+        \sum_q G_{pq} = \sum_q G_{qp}
+        & = \frac{2 e^2}{h} \int \left( -\frac{\partial f_0}{\partial E} \right) \sum_q \overline{T}_{pq}(E) \dd E \\
+        & = \frac{2 e^2}{h} \int \left( -\frac{\partial f_0}{\partial E} \right) M_p(E) \dd E = \frac{2 e^2}{h} M_p(E_f) \mbox{ at low temperatures}
+    \end{aligned}
+\end{equation}
+\subsection{Reciprocity}
+For coherent transport, the symmetry properties of the S-matrix ensure that the reciprocity relation is satisfied. The basic property of the S-matrix that we will use is that reversing the magneti field transposes the S-matrix:
+\begin{equation}
+    [S]_{+B} = [S]^t_{-B},\quad \mbox{or} \quad s_{mn}(+B) = s_{nm}(-B)
+\end{equation}
+To prove this, suppose we have solved the Schrodinger equation
+\begin{equation}
+    \left[E_s + \frac{(\ii \hbar \nabla + e\vec{A})^2}{2 m} + U(x,y) \right] \Psi(x,y) = E \Psi(x,y)
+\end{equation}
+To obtain the S-matrix connecting the outgoing amplitudes ${b}$ to the incoming amplitudes ${a}$. If we take the complex conjugate of the Schrodinger equation, we obtain
+\begin{equation}
+    \left[E_s + \frac{(\ii \hbar \nabla - e\vec{A})^2}{2 m} + U(x,y) \right] \Psi^*(x,y) = E \Psi^*(x,y)
+\end{equation}
+and reverse the vector potential $\vec{A} \rightarrow -\vec{A}$ (which is equivalent to reversing the magnetic field $\vec{B} = \nabla \times \vec{A}$)
+\begin{equation}
+    \left[E_s + \frac{(\ii \hbar \nabla + e\vec{A})^2}{2 m} + U(x,y) \right] \Psi^*(x,y) = E \Psi^*(x,y)
+\end{equation}
+Thus $\Psi^*(x,y)$ is also a solution of the Schrodinger equation, which means
+\begin{equation}
+    \left[\psi^*(x,y)\right]_{-B} = \left[\psi(x,y)\right]_{+B}
+\end{equation}
+Taking the complex conjugate turns an incoming wave into an outgoing wave and vice versa (for current density $J = \frac{\hbar}{m} \Im(\psi^* \nabla \psi)$, complex conjugate turns $J\to -J$). So if
+\begin{equation}
+    \{b\} = [S]_{+B} \{a\} \rightarrow \{b^*\} = [S]^*_{+B} \{a^*\}
+\end{equation}
+then we must have
+\begin{equation}
+    \{a^*\} = [S]_{-B} \{b^*\} \rightarrow \{b^*\} = [S]^{-1}_{-B} \{a^*\}
+\end{equation}
+Hence
+\begin{equation}
+    [S]^{-1}_{-B} = [S]^*_{+B}
+\end{equation}
+with the unitarity of the S-matrix
+\begin{equation}
+    [S]^\dagger_{-B} = [S]^{-1}_{-B}
+\end{equation}
+we obtain
+\begin{equation}
+    [S]^*_{+B} = [S]^\dagger_{-B} \Rightarrow [S]_{+B} = [S]^t_{-B}
+\end{equation}
+Next we take the squared magnitude of both sides and sum over all modes m in lead p and over all modes n in lead q to obtain
+\begin{equation}
+    \sum_{m \in p} \sum_{n \in q} \abs{s_{mn}}_{+B}^2 = \sum_{m \in p} \sum_{n \in q} \abs{s_{nm}}_{-B}^2
+\end{equation}
+which implies the reciprocity relation for the transmission function:
+\begin{equation}
+\overline{T}_{p \leftarrow q}(+B) = \overline{T}_{q \leftarrow p}(-B)
+\end{equation}
+Thus the conductance matrix obeys the Onsager reciprocity relation:
+\begin{equation}
+    [G_{pq}]_{+B} = [G_{qp}]_{-B}
+\end{equation}
+The property of reciprocity holds only for small bias, unlike the sum rules discussed in the last subsection which hold irrespective of the bias. The reason is that we need to assume the electrostatic potential $U(x,y)$ is inside the conductor remains unchanged when the magnetic field is reversed.
+\section{Combining S-matrices}
+Consider a four-terminal Hall bridge, divided into two sections which have S-matrices $[S^{(1)}]$ and $[S^{(2)}]$ respectively. We can combine them to obtain the composite S-matrix.
+\begin{equation}
+    s = s^{(1)} \otimes s^{(2)}
+\end{equation}
+Let us write the individual S-matrices in the form
+\begin{equation}
+    \begin{pmatrix}
+        b_{13} \\
+        b_5
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        r^{(1)} & t'^{(1)} \\
+        t^{(1)} & r'^{(1)}
+    \end{bmatrix}
+    \begin{pmatrix}
+        a_{13} \\
+        a_5
+    \end{pmatrix}, \quad
+    \begin{pmatrix}
+        a_5 \\
+        b_{24}
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        r^{(2)} & t'^{(2)} \\
+        t^{(2)} & r'^{(2)}
+    \end{bmatrix}
+    \begin{pmatrix}
+        b_5 \\
+        a_{24}
+    \end{pmatrix}
+\end{equation}
+where $a_{13} = (a_1, a_3)^t$, $b_{13} = (b_1, b_3)^t$, $a_{24} = (a_2, a_4)^t$, and $b_{24} = (b_2, b_4)^t$. The matrices $r$, $r'$, $t$, and $t'$ are the reflection and transmission sub-matrices. To obtain the composite S-matrix,. Note that at terminal 5 in Fig.3.2.1, the incoming amplitude $a_5$ for section 1 is equal to the outgoing amplitude $b_5$ for section 2. We can eliminate $a_5$ and $b_5$ to obtain
+\begin{equation}
+    \begin{pmatrix}
+        b_{13} \\
+        b_{24}
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        r^{(1)} + t'^{(1)} [I - r^{(2)} r'^{(1)}]^{-1} r^{(2)} t^{(1)} & t'^{(1)} [I - r^{(2)} r'^{(1)}]^{-1} t'^{(2)} \\
+        t^{(2)} [I - r'^{(1)} r^{(2)}]^{-1} t^{(1)} & r'^{(2)} + t^{(2)} [I - r'^{(1)} r^{(2)}]^{-1} r'^{(1)} t'^{(2)}
+    \end{bmatrix}
+    \begin{pmatrix}
+        a_{13} \\
+        a_{24}
+    \end{pmatrix}
+\end{equation}
+let us denote the composite S-matrix by
+\begin{equation}
+    [S] =
+    \begin{bmatrix}
+        r & t' \\
+        t & r'
+    \end{bmatrix}, \quad
+    \begin{pmatrix}
+        b_{13} \\
+        b_{24}
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        r & t' \\
+        t & r'
+    \end{bmatrix}
+    \begin{pmatrix}
+        a_{13} \\
+        a_{24}
+    \end{pmatrix}
+\end{equation}
+where the sub-matrices are given by
+\begin{equation} \label{eq:compositeS}
+    \begin{aligned}
+        r & = r^{(1)} + t'^{(1)} [I - r^{(2)} r'^{(1)}]^{-1} r^{(2)} t^{(1)} \\
+        t' & = t'^{(1)} [I - r^{(2)} r'^{(1)}]^{-1} t'^{(2)} \\
+        t & = t^{(2)} [I - r'^{(1)} r^{(2)}]^{-1} t^{(1)} \\
+        r' & = r'^{(2)} + t^{(2)} [I - r'^{(1)} r^{(2)}]^{-1} r'^{(1)} t'^{(2)}
+    \end{aligned}
+\end{equation}
+\subsection{Feynman paths}
+We can get insight into this result by expanding the expressions in a geometric series as follows:
+\begin{equation}
+    \begin{aligned}
+        t & = t^{(2)} \left[ I - r'^{(1)} r^{(2)} \right]^{-1} t^{(1)} \\
+        & = t^{(2)} \left[ I + r'^{(1)} r^{(2)} + (r'^{(1)} r^{(2)})^2 + \cdots \right] t^{(1)} \\
+        & = t^{(2)} t^{(1)} + t^{(2)} r'^{(1)} r^{(2)} t^{(1)} + t^{(2)} r'^{(1)} r^{(2)} r'^{(1)} r^{(2)} t^{(1)} + \cdots
+    \end{aligned}
+\end{equation}
+The first term is the amplitude for transmission through the two obstacles without any reflection, the second term for transmission with two reflections, the third term for transmission with four reflections and so on. Consider the element $(m,n)$ of these terms
+\begin{equation}
+\left( t^{(2)}[r'^{(1)}r^{(2)}t^{(1)}] \right)_{mn} \rightarrow \sum_{m1}\sum_{m2}\sum_{m3} \left( t^{(2)} \right)_{m,m3} \left( r'^{(1)} \right)_{m3,m2} \left( r^{(2)} \right)_{m2,m1} \left( t^{(1)} \right)_{m1,n}
+\end{equation}
+We could depict each term in this summation by a Feynman path. A path starts out in mode $n$, transmits to mode $m_1$, reflects to mode $m_2$, reflects again to mode $m_3$, and then transmit to mode $m$. The overall transmission amplitude from mode $n$ to mode $m$ can be expressed as
+\begin{equation}
+    (t)_{mn} = \sum_{P \in \mbox{all paths}} A_P \mbox{(the amplitude for Path $P$)}
+\end{equation}
+\subsection{Combining successive sections incoherent}
+The transimission probability is obtained by squaring the transimission amplitude:
+\begin{equation}
+    T_{mn} = t_{mn}^*t_{mn} = \sum_P A_P^*A_P + \sum_{P\neq P'}\sum_{P'} A_P^*A_P
+\end{equation}
+The first term represents the sum of the probabilities of all the paths, while the second term is due to interference among the different paths. If the length of a section is much greater than the phase-relaxation length then sucessive sections could be treated as incoherent. This means theat instead of adding the amplitudes of the different paths, we should add their probabilities, which means dropping the cross-terms. The simplest way to do this is to calculate the transmission probability by combining probability matrices instead of S-matrices. Instead of $s=s_1\otimes s_2$, we calculate $S = S_1\otimes S_2$ where the probability matrix $S$ is obtained simply by squaring the corresponding elements of the amplitude matrix $s$:
+\begin{equation}
+    S(m,n) = \abs{s(m,n)}^2
+\end{equation}
+One can gain insight into the effect of quantum interference by comparing the results obtained by combining successive scatters coherently and incoherently. A simple example involving two scatterers in a single-mode conductor whoese S-matrices are given by
+\begin{equation}
+    s_1 =
+    \begin{bmatrix}
+        r_1 & t'_1 \\
+        t_1 & r'_1
+    \end{bmatrix}, \quad
+    s_2 =
+    \begin{bmatrix}
+        r_2 & t'_2 \\
+        t_2 & r'_2
+    \end{bmatrix}
+\end{equation}
+Since we are considering just one mode, the quantities $r,t$ etc. are just complex numbers but not matrices. The probability matrices are given by
+\begin{equation}
+    S_1 =
+    \begin{bmatrix}
+        R_1 & T_1 \\
+        T_1 & R_1
+    \end{bmatrix}, \quad
+    S_2 =
+    \begin{bmatrix}
+        R_2 & T_2 \\
+        T_2 & R_2
+    \end{bmatrix}
+\end{equation}
+where $R_i = \abs{r_i}^2 = \abs{r'_i}^2$ and $T_i = \abs{t_i}^2 = \abs{t'_i}^2$ for $i=1,2$. The unitarity of the S-matrix requires that $R_i + T_i = 1$. Combine the two individual amplitude matrices to obtain the composite transimission amplitude\ref{eq:compositeS}
+\begin{equation}
+    t = \frac{t_1 t_2}{1 - r'_1 r_2}
+\end{equation}
+Squaring this, we obtain the composite transmission probability
+\begin{equation}
+    T = \abs{t}^2 = \frac{T_1 T_2}{1 - 2 \sqrt{R_1 R_2} \cos \theta + R_1 R_2}\quad \mbox{(coherent)}
+\end{equation}
+where $\theta$ is the phase shift acquired in one round-trip between the scatterers: $\theta = \mbox{phase}(r'_1) + \mbox{phase}(r'_2)$. If we treat the two scatterers incoherently by combining the probability matrices, we obtain
+\begin{equation}
+    T = \frac{T_1 T_2}{1 - R_1 R_2} \quad \mbox{(incoherent)}
+\end{equation}
+\subsection{Combining successive sections with partial coherence}
+
+\end{document}

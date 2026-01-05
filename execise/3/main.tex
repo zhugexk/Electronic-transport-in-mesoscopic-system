@@ -1,0 +1,94 @@
+\documentclass[11pt,a4paper]{article}
+%-------------------------
+% Basic packages
+%-------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{physics}    % convenient bra-ket, derivatives, etc.
+\usepackage{siunitx}    % units
+\usepackage{braket}     % alternate bra/ket macros
+\usepackage{mhchem}     % chemistry notation if needed
+
+% Figures & graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% References, hyperlinks, and clever names
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% Lists and layout
+\usepackage{enumitem}
+\setlist{itemsep=2pt,parsep=2pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%-------------------------
+% Useful macros
+%-------------------------
+% \newcommand{\dd}{\mathrm{d}}                      % differential
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\eexp}{\mathrm{e}}                    % exponential base
+\DeclareMathOperator{\sgn}{sgn}
+
+% Shortcuts for common physics notation (overrides safe if physics package present)
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+%-------------------------
+% Bibliography (biber/biblatex) - optional
+%-------------------------
+% \usepackage[backend=biber,style=phys]{biblatex}
+% \addbibresource{references.bib}
+
+%-------------------------
+% Document metadata
+%-------------------------
+\title{Execise 2}
+\author{Zhuge X.K.}
+\date{\today}
+
+%-------------------------
+% Document
+%-------------------------
+\begin{document}
+
+\maketitle
+\section*{Exercise 2.1(E.4.1, page 194)}
+Consider a slightly simplified form of the structure shown in Fig. 4.2.2 as shown in Fig.E.4.1
+\begin{enumerate}[label=(\alph*)]
+    \item Write down the conductance matrix for this structure assuming that there is no communication between edge states as thy propagate from the constriction to terminal 3.
+    \item Use the Buttiker formula(Eq.(2.5.8)) to show that the Hall resistance is given by
+    \[
+        R_H = \frac{V_2 - V_3}{I} = \frac{h}{2e^2 M}\frac{1}{1-p}
+    \]
+    as reasoned in the text.
+\end{enumerate}
+
+\section*{Exercise 2.2(E.4.2, page 194)}
+Consider the same structure as in E.4.1 but with an extra terminal '5' inserted, as shown in Fig.E.4.2. Write down the conductance matrix for this sturcture and show that the Hall resistance is now given by
+\[
+    R_H = \frac{V_2-V_3}{I} = \frac{h}{2e^2 M}
+\]
+The extra terminal establishes an equilibrium between the edge states and changes the Hall resistance. This is a rather surprising result which has been observed experimentally. In macroscopic conductors, we do not expexted an extra floating probe('5') to affect the measurement.
+\end{document}

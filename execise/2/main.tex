@@ -1,0 +1,141 @@
+\documentclass[11pt,a4paper]{article}
+%-------------------------
+% Basic packages
+%-------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{physics}    % convenient bra-ket, derivatives, etc.
+\usepackage{siunitx}    % units
+\usepackage{braket}     % alternate bra/ket macros
+\usepackage{mhchem}     % chemistry notation if needed
+
+% Figures & graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% References, hyperlinks, and clever names
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% Lists and layout
+\usepackage{enumitem}
+\setlist{itemsep=2pt,parsep=2pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%-------------------------
+% Useful macros
+%-------------------------
+% \newcommand{\dd}{\mathrm{d}}                      % differential
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\eexp}{\mathrm{e}}                    % exponential base
+\DeclareMathOperator{\sgn}{sgn}
+
+% Shortcuts for common physics notation (overrides safe if physics package present)
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+%-------------------------
+% Bibliography (biber/biblatex) - optional
+%-------------------------
+% \usepackage[backend=biber,style=phys]{biblatex}
+% \addbibresource{references.bib}
+
+%-------------------------
+% Document metadata
+%-------------------------
+\title{Execise 2}
+\author{Zhuge X.K.}
+\date{\today}
+
+%-------------------------
+% Document
+%-------------------------
+\begin{document}
+
+\maketitle
+\section*{Exercise 1.2(E.2.1, page 112)}
+In Section 2.1 we calculate the contact resistance when a narrow conductor with M modes is connect to two very wide contacts. If the number of modes in the contacts is not infinite, but some finite number, N, then the left-moving and right-moving carriers inside the contacts have different electrochemical potentials as shown in Fig. E.2.1 (page 112 of Datta's book).Show that the contact resistance taking this into account is given by
+\[
+    R_c = \frac{h}{2e^2}\left[\frac{1}{M}-\frac{1}{N}\right]
+\]
+Assume reflectionless contacts as in the text. For futher discussions on the nature of the contact resistance at different types of interfaces see R.Landauer(1989), hys. Cond. Matter, 1, 8099 and M. C. Payne(1989), J. Phys. Cond. Matter, 1, 4931.
+
+\begin{proof}
+Beacuse of the reflectionless junction constraint, The right-moving population injected from the left contact into the conductor keeps the same
+\[
+    \mu_{ch}^+ = \mu_L^+
+\]
+and the left-moving population injected from the right contact into the conductor also keeps the same
+\[
+    \mu_{ch}^- = \mu_R^-
+\]
+But inside each contact, beacuse N is finite, the measured contact voltage drop is set by the reservoir electrochemical potentials:
+\[
+    eV = \mu_L - \mu_R
+\]
+The current is conserved throughout the structure, so we can calculate it inside the conductor where we have already known that
+\[
+    I = \frac{2e}{h}M(\mu_{ch}^+ - \mu_{ch}^-) = \frac{2e}{h}M(\mu_L^+ - \mu_R^-)
+\]
+in the left and right contacts, we have
+\[
+    I = \frac{2e}{h}N(\mu_L^+ - \mu_L^-), \quad I = \frac{2e}{h}N(\mu_R^+ - \mu_R^-)
+\]
+The reservoir electrochemical potentials equal the average of the right-moving and left-moving populations inside the contacts:
+\[
+    \mu_L = \frac{\mu_L^+ + \mu_L^-}{2}, \quad \mu_R = \frac{\mu_R^+ + \mu_R^-}{2}
+\]
+So the measured voltage is
+\[
+    eV = \mu_L - \mu_R = \frac{\mu_L^+ + \mu_L^-}{2} - \frac{\mu_R^+ + \mu_R^-}{2}
+\]
+The internal voltage drop which drives the current through the conductor is
+\[
+    \Delta \mu_{ch} = \mu_{ch}^+ - \mu_{ch}^- = \mu_L^+ - \mu_R^-
+\]
+Then we have
+\[
+    \Delta \mu_{ch} = \frac{h}{2e}\frac{I}{M}
+\]
+\[
+    \mu_L^+-\mu_L^- = \frac{h}{2e}\frac{I}{N}, \quad \mu_R^+ - \mu_R^- = \frac{h}{2e}\frac{I}{N}
+\]
+then $eV$ can be written as
+\begin{equation}
+    \begin{aligned}
+        eV
+        & = \frac{(\mu_L^+ + \mu_L^-)-(\mu_R^- + \mu_R^+)}{2} \\
+        & = \frac{(\mu_L^+ - \mu_R^-)+(\mu_L^- - \mu_R^+)}{2} \\
+        & = \frac{(\mu_L^+ - \mu_R^-)}{2} + \frac{(\mu_L^+ - \mu_R^-)-\frac{hI}{eN}}{2} \\
+        & = \mu_L^+ - \mu_R^- - \frac{hI}{2eN} \\
+        & = \frac{hI}{2e}\left(\frac{1}{M} - \frac{1}{N}\right)
+    \end{aligned}
+\end{equation}
+Therefore, the contact resistance is
+\[
+    R_c = \frac{V}{I} = \frac{h}{2e^2}\left(\frac{1}{M} - \frac{1}{N}\right)
+\]
+\end{proof}
+
+\end{document}
