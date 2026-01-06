@@ -1443,6 +1443,678 @@ where $\theta$ is the phase shift acquired in one round-trip between the scatter
 \begin{equation}
     T = \frac{T_1 T_2}{1 - R_1 R_2} \quad \mbox{(incoherent)}
 \end{equation}
-\subsection{Combining successive sections with partial coherence}
+\section{Green's functions:a brief introduction}
+The S-matrix tells us the response at one lead due to an excitation at another. The Green's function is a more powerful concept that gives us excitation at any point due to an excitation at any other. For non-interacting transport, the only excitations we need to worry about are those due to waves incident from the leads. For such excitations, the Green's function and the S-matrix are related concepts and what we use is largely a matter of taste. Whenever the response $R$ is related to the excitation $S$ by a differential operator $D_{op}$
+\begin{equation}
+    D_{op} R = S
+\end{equation}
+We can define a Green's fuction and express the response in the forms
+\begin{equation}
+    R = D_{op}^{-1} S = GS \quad \mbox{where} \quad G = D_{op}^{-1}
+\end{equation}
+Out problem can be expressed in teh form
+\begin{equation}
+    \left[ E - H_{op} \right] \Psi = S
+\end{equation}
+where $\Psi$ is the wavefunction, and $S$ is an equivalent excitation term due to a wave incident from one of the leads. The corresponding Green's function can be written as
+\begin{equation}
+    G = \left[E - H_{op} \right]^{-1}
+\end{equation}
+where $H_{op}$ is the Hamiltonian operator, the subband energy $E_s$ has been included as part of the potential $U(x,y)$
+\begin{equation}
+    H_{op} = \frac{(\ii \hbar \nabla + e\vec{A})^2}{2 m} + U(\vec{r})
+\end{equation}
+\subsection{Retarded and advanced Green's functions}
+The inverse of a different operator is not uniquely specified till we specify the boundary conditions. It is common to define two different Green's functions (retarded and advanced) corresponding to two different boundary conditions. The difference is best appreciated with a simple example. Consider a simple 1D wire with a constant potential energy $U_0$ and zero vector potential, thus we can write
+\begin{equation}
+    G = \left[ E - U_0 + \frac{\hbar^2}{2m}\pdv{^2}{x^2} \right]^{-1}
+\end{equation}
+The Green's function satisfies the equation
+\begin{equation}
+    \left[ E - U_0 + \frac{\hbar^2}{2m}\pdv{^2}{x^2} \right] G(x,x') = \delta(x-x')
+\end{equation}
+This looks like the schrodinger equation except for the source term $\delta(x-x')$ on the right. We could view the Green's function $G(x,x')$ as the wavefunction at $x$ resulting from a unit rise to two waves traveling outwards from the point of excitation, with amplitudes $A^+$ and $A^-$. We can write
+\begin{equation}
+    G(x,x') =  \begin{cases}
+        A^+ e^{i k (x - x')} & x > x' \\
+        A^- e^{-i k (x - x')} & x < x'
+    \end{cases}
+\end{equation}
+where $k = \sqrt{2 m (E - U_0)}/\hbar$. Regardless of what $A^+$ and $A^-$ might be, the Green's function must be continuous at $x = x'$ to satisfies the above equation. Thus we have
+\begin{equation}
+    [G(x,x')]_{x=x'^+} = [G(x,x')]_{x=x'^-}
+\end{equation}
+while the derivative must be discontinuous by $2 m/ \hbar^2$ to satisfy the delta function source term:
+\begin{equation}
+    \left[ \pdv{G(x,x')}{x} \right]_{x=x'^+} - \left[ \pdv{G(x,x')}{x} \right]_{x=x'^-} = \frac{2 m}{\hbar^2}
+\end{equation}
+These two conditions allow us to solve for $A^+$ and $A^-$:
+\begin{equation}
+    A^+ = A^-,\quad \ii k\left[A^+ + A^- \right] = \frac{2 m}{\hbar^2} \Rightarrow A^+ = A^- = \frac{m}{\ii \hbar^2 k}
+\end{equation}
+and the Green's function is given by
+\begin{equation}
+    G^R(x,x') = -\frac{\ii}{\hbar v} \exp\left(\ii k \abs{x - x'}\right)
+\end{equation}
+It is important to note that there is another solution
+\begin{equation}
+    G^A(x,x') = \frac{\ii}{\hbar v} \exp\left(-\ii k \abs{x - x'}\right)
+\end{equation}
+where
+\begin{equation}
+    v = \frac{\hbar k}{m},\quad k = \sqrt{\frac{2 m (E - U_0)}{\hbar^2}}
+\end{equation}
+which satisfies the same equation. This solution consists of incoming waves that disapper at the point of excitation rather than outgoing waves that originate at the point of excitation. The first solution is called the retarded Green's function $G^R$ while the second is called the advanced Green's function $G^A$. 
+\subsection{The infinitesimal}
+One way to incorporate the boundary conditions into the equation itself is to add an infinitesimal imaginary part to the energy
+\begin{equation}
+    \left[ E - U_0 + \frac{\hbar^2}{2m}\pdv{^2}{x^2} \pm \ii \eta \right] G^{R/A}(x,x') = \delta(x-x')
+\end{equation}
+The small imaginary part ensures that the wavevector $k$ has a small positive or negative imaginary part, which ensures that the waves are outgoing or incoming respectively.
+\begin{equation}
+    k' = \sqrt{\frac{2 m (E - U_0 \pm \ii \eta)}{\hbar^2}} = \frac{\sqrt{2m(E-U_0)}}{\hbar}\sqrt{1+ \frac{\pm \ii \eta}{E-U_0}} \approx k \pm \ii \frac{m \eta}{\hbar^2 k} \equiv k(1\pm \ii \delta)
+\end{equation}
+In general the retarded Green's function is defined As
+\begin{equation}
+    G^R = \left[E - H_{op} + \ii \eta \right]^{-1}, \quad \eta \to 0^+
+\end{equation}
+\begin{equation}
+    G^A = \left[E - H_{op} - \ii \eta \right]^{-1}, \quad \eta \to 0^+
+\end{equation}
+\subsection{Green's function for a multi-moded wire}
+Next let us look at the Green's function for a infinite multi-moded wire. The Green's function represents the wavefunction at $(x,y)$ due to an excitation at $(x',y')$. We could write the Green's function in terms of the transverse modes $\chi_n(y)$ of the wire as
+\begin{equation}
+    G^R(x,y;x',y') = \sum_m A^{\pm}_m\chi_m(y)\exp \left[\ii k_m \abs{x - x'}\right]
+\end{equation}
+Where the $A^+_m$ and $A^-_m$ are the amplitudes of the different modes that propagate away from the source. The transverse mode wavefunctions, $\chi_m(y)$, satisfy the equation (with $\vec{B}=0$)
+\begin{equation}
+    \left[\frac{-\hbar^2}{2 m} \pdv{^2}{y^2} + U(y) \right] \chi_m(y) = \epsilon_{m,0} \chi_m(y)
+\end{equation}
+where $U(y)$ is the transverse confining potential in the $y$-direction. These functions are orthonormal:
+\begin{equation}
+    \int \chi_m(y) \chi_n(y) \dd y = \delta_{mn}
+\end{equation}
+Since they satisfy the same equation with differnet eigenvalues. We will assume that these functions are real. To calculate the mode amplitudes $A^{\pm}_m$, we processed as we did for the single-mode wire.
+\begin{equation}
+    \left[G^R(x,x')\right]_{x=x'^+} = \left[G^R(x,x')\right]_{x=x'^-}
+\end{equation}
+\begin{equation}
+    \left[ \pdv{G^R(x,x')}{x} \right]_{x=x'^+} - \left[ \pdv{G^R(x,x')}{x} \right]_{x=x'^-} = \frac{2 m}{\hbar^2} \delta(y-y')
+\end{equation}
+we obtain
+\begin{equation}
+    \begin{aligned}
+        & \sum_m A^+_m \chi_m(y) = \sum_m A^-_m \chi_m(y) \\
+        & \sum_m \ii k_m \left(A_m^+ + A_m^-\right)\chi_m(y) = \frac{2 m}{\hbar^2} \delta(y-y')
+    \end{aligned}
+\end{equation}
+Multiplying both sides of these equations by $\chi_n(y)$ and integrating over y, we obtain
+\begin{equation}
+    A_m^+ = A_m^-,\quad A_m^+ = A_m^- = \frac{m}{\ii \hbar^2 k_m} \chi_m(y') = -\frac{\ii}{\hbar v_m} \chi_m(y')
+\end{equation}
+where $v_m = \hbar k_m/m$ is the velocity in mode m. Thus the retarded Green's function for a multi-moded wire is given by
+\begin{equation}
+    G^R(x,y;x',y') = \sum_m -\frac{\ii}{\hbar v_m} \chi_m(y) \chi_m(y') \exp\left(\ii k_m \abs{x - x'}\right)
+\end{equation}
+where
+\begin{equation}
+    k_m = \sqrt{\frac{2 m (E - \epsilon_{m,0})}{\hbar^2}}, \quad v_m = \frac{\hbar k_m}{m}
+\end{equation}
+\subsection{Eigenfuction expansion}
+We end this section by deriving a result that is often used to calculate Green's functions. The basic idea is that for any structure, if we know the eigenfucntions of the Hamiltonian operator
+\begin{equation}
+    H_{op} \psi_\alpha(\vec{r}) = \epsilon_\alpha \psi_\alpha(\vec{r})
+\end{equation}
+Then we can calculate the Green's function by performing the following summation:
+\begin{equation}
+    G^R(\vec{r},\vec{r}') = \sum_\alpha \frac{\psi_\alpha(\vec{r}) \psi_\alpha^*(\vec{r}')}{E - \epsilon_\alpha + \ii \eta}, \quad \eta \to 0^+
+\end{equation}
+The eigenfunctions satisfies the orthonormality condition
+\begin{equation}
+    \int \psi_\alpha^*(\vec{r}) \psi_\beta(\vec{r}) \dd \vec{r} = \delta_{\alpha \beta}
+\end{equation}
+So that we can expand the Green's function in the form
+\begin{equation}
+    G^R(\vec{r},\vec{r}') = \sum_\alpha C_\alpha(\vec{r}') \psi_\alpha(\vec{r})
+\end{equation}
+Substituting this into the defining equation for the Green's function
+\begin{equation}
+    \left[E - H_{op} + \ii \eta \right] G^R(\vec{r},\vec{r}') = \delta(\vec{r} - \vec{r}')
+\end{equation}
+we obtain
+\begin{equation}
+    \sum_\alpha C_\alpha(\vec{r}') \left[E - \epsilon_\alpha + \ii \eta \right] \psi_\alpha(\vec{r}) = \delta(\vec{r} - \vec{r}')
+\end{equation}
+Multiplying both sides by $\psi_\beta^*(\vec{r})$ and integrating over $\vec{r}$, we obtain
+\begin{equation}
+    C_\beta(\vec{r}')  = \frac{\psi_\beta^*(\vec{r}')}{E - \epsilon_\beta + \ii \eta }
+\end{equation}
+For advanced Green's function, we have
+\begin{equation}
+    G^A(\vec{r},\vec{r}') = \sum_\alpha \frac{\psi_\alpha(\vec{r}) \psi_\alpha^*(\vec{r}')}{E - \epsilon_\alpha - \ii \eta}, \quad \eta \to 0^+
+\end{equation}
+It is straightforward to show that the advanced Green's function is the Hermitian conjugate of the retarded Green's function:
+\begin{equation}
+    G^A(\vec{r},\vec{r}') = \left[ G^R(\vec{r}',\vec{r}) \right]^* \rightarrow G^A = \left[G^R\right]^\dagger
+\end{equation}
+\section{S-matrix and the Green's function}
+The Fisher-lee relation provides a direct connection between the S-matrix and the Green's funcion. Consider a conductor connected to a set of leads. For convenience, we use a different coordinate system in each lead as shown in Fig.3.4.1. The interface between lead $p$ and the conductor is defined by $x_p = 0$. We will use the symbol $G^R_{qp}$ to denote the Green's functioin between a point lying on the plane $x_p=0$ and another point lying on $x_q =0$:
+\begin{equation}
+    G^R_{qp}(y_q; y_p) = G^R(x_q = 0, y_q; x_p=0, y_p)
+\end{equation}
+Neglect the transverse dimension ($y$) of the leads and treat them as 1D. We know that the unit excitationn at $x_p=0$ gives rise to a wave of amplitude $A_p^-$ away from the conductor and a wave of amplitude $A_p^+$ toward the conductor. The wave traveling toward the conductor is scattered by the conductor into different leads. Hence we can write
+\begin{equation}
+    G^R_{qp} = \delta_{qp}A_p^- + s'_{qp} A_p^+
+\end{equation}
+But we know that
+\begin{equation}
+    A_p^- = A_p^+ = -\frac{\ii}{\hbar v_p}
+\end{equation}
+also
+\begin{equation}
+    s'_{qp} = s_{qp} \sqrt{\frac{v_p}{v_q}}
+\end{equation}
+Hence we obtain
+\begin{equation}
+    s_{qp} = -\delta_{qp} + \ii \hbar \sqrt{v_q v_p} G^R_{qp}
+\end{equation}
+
+\subsection{Multi-moded leads}
+Take multiple modes into account, we can write the Green's function between lead $p$ and lead $q$ as
+\begin{equation}
+    G^R_{qp}(y_q; y_p) = \sum_{m \in p} \sum_{n \in q} \left[ \delta_{nm}A_m^- + s'_{nm}A_m^+\right]\chi_n(y_q)
+\end{equation}
+we know that 
+\begin{equation}
+    A_m^- = A_m^+ = -\frac{\ii}{\hbar v_m}
+\end{equation}
+also
+\begin{equation}
+    s'_{nm} = s_{nm} \sqrt{\frac{v_m}{v_n}}
+\end{equation}
+Hence we obtain
+\begin{equation}
+    \begin{aligned}
+        G^R_{qp}(y_q; y_p) & = \sum_{m \in p} \sum_{n \in q} \left[ -\delta_{nm} \frac{\ii}{\hbar v_m} + s_{nm} \frac{-\ii}{\hbar} \sqrt{\frac{1}{v_n v_m}} \right] \chi_n(y_q) \chi_m(y_p) \\
+        & = \sum_{m \in p} \sum_{n \in q} -\frac{\ii}{\hbar \sqrt{v_n v_m}} \chi_n(y_q) \left[ \delta_{nm} + s_{nm} \right] \chi_m(y_p)
+    \end{aligned}
+\end{equation}
+In order to obtain an expression for an individual S-matrix element, we multiply equation above by $\chi_m(y_q) \chi_n(y_p)$ and integrate over $y_q$ and $y_p$ to obtain Fisher
+\begin{equation}
+    s_{nm} = -\delta_{nm} + \ii \hbar \sqrt{v_n v_m} \int \dd y_q \int \dd y_p \chi_n(y_q) G^R_{qp}(y_q; y_p) \chi_m(y_p)
+\end{equation}
+\section{Tight-binding model(or the method of finite differences)}
+Basically, we need too solve the differnetial equation for the Green's function
+\begin{equation}
+    \left[E - H_{op} + \ii \eta \right] G^R(\vec{r},\vec{r}') = \delta(\vec{r} - \vec{r}')
+\end{equation}
+for arbitrary $U(\vec{r})$ and $\vec{A}(\vec{r})$. We will restrict the discussion to 2D systems, but the method can be applied to 3D systems in a straightforward manner. A common approach for solving a differential equation is to discretize the spatial coordinate so that the Green's function becomes a matrix
+\begin{equation}
+    G^R(\vec{r}_i, \vec{r}_j) \to G^R(i,j)
+\end{equation}
+where the indices $i,j$ denote points on a discrete lattice. The differential equation becomes a matrix equation
+\begin{equation}
+    [(E+\ii \eta)I - H] G^R = I 
+\end{equation}
+where $H$ is the matrix representation of the Hamiltonian operator $H_{op}$. $I$ is the identity matrix.
+\subsection{Matrix representation for the Hamiltonian operator in 1D}
+In 1D, with vector potential set to zero, the Hamiltonian operator simplifies to
+\begin{equation}
+    H_{op} = -\frac{\hbar^2}{2 m} \frac{\dd^2}{x^2} + U(x)
+\end{equation}
+To obtain a matrix representation for this operator, we consider the quantity $H_{op}F(x)$ where $F(x)$ is any function of $x$. Now we choose a discrete lattice whose points are located at $x = ja$, $j$ being an integer and write 
+\begin{equation}
+    [H_{op}F(x)]_{x=ja} = -\frac{\hbar^2}{2 m} \left[ \frac{\dd^2 F(x)}{\dd x^2} \right]_{x=ja} + U_j F_j
+\end{equation}
+where
+\begin{equation}
+    U_j = U(ja), \quad F_j = F(ja)
+\end{equation}
+Assuming $a$ is small, we can approximate the second derivative by
+\begin{equation}
+    \left[ \frac{\dd^2 F(x)}{\dd x^2} \right]_{x=ja} \approx \frac{F_{j+1} - 2 F_j + F_{j-1}}{a^2}
+\end{equation}
+With this approximation we can write
+\begin{equation}
+    \begin{aligned}
+        [H_{op}F(x)]_{x=ja} & = -\frac{\hbar^2}{2 m a^2} (F_{j+1} - 2 F_j + F_{j-1}) + U_j F_j \\
+        & = -t (F_{j+1} + F_{j-1}) + (2 t + U_j) F_j, \quad t = \frac{\hbar^2}{2 m a^2} \\
+        & = \sum_{i} H(j,i) F_i
+    \end{aligned}
+\end{equation}
+where
+\begin{equation}
+    H(j,i) = \begin{cases}
+        -t & i = j \pm 1 \\
+        2 t + U_j & i = j \\
+        0 & \mbox{otherwise}
+    \end{cases}
+\end{equation}
+The desired matrix representation for the Hamiltonian operator in 1D is thus obtained.
+\begin{equation}
+    H = 
+    \begin{bmatrix}
+        2t + U_1 & -t & 0 & 0 & \cdots \\
+        -t & 2t + U_2 & -t & 0 & \cdots \\
+        0 & -t & 2t + U_3 & -t & \cdots \\
+        0 & 0 & -t & 2t + U_4 & \cdots \\
+        \vdots & \vdots & \vdots & \vdots & \ddots
+    \end{bmatrix}
+\end{equation}
+
+\subsection{Dispersioin relation fro a discrete lattice}
+We know that for a uniform 1D wire with a constant potential $U(x)=U_0$, the eigenfunctions are plane waves with a parabolic dispersion relation:
+\begin{equation}
+    \psi_k(x) = \exp (\ii k x), \quad E(k) = U_0 + \frac{\hbar^2 k^2}{2 m}
+\end{equation}
+For the discrete lattice model, we can write the Schrodinger equation as 
+\begin{equation}
+    E \psi_j = (U_0 + 2 t) \psi_j - t \psi_{j+1} - t \psi_{j-1})
+\end{equation}
+which is satisfied by a solution of the form
+\begin{equation}
+    \psi_j = \exp(\ii k x_j) ,\quad x_j = j a
+\end{equation}
+privided
+\begin{equation}
+    E(k) = U_0 + 2 t [1 - \cos(ka)] = U_0 + \frac{\hbar^2}{m a^2} \sin^2\left(\frac{ka}{2}\right)
+\end{equation}
+As $a$ tends to zero, the dispersion relation approaches the parabolic form. The velocity is given by
+\begin{equation}
+    v(k) = \frac{1}{\hbar} \pdv{E}{k} = \frac{2 a t}{\hbar} \sin(ka)
+\end{equation}
+As $a$ tends to zero, this expression approaches the familiar form $v = \hbar k/m$.
+\subsection{Matrix representation for the Hamiltonian operator in 2D}
+In 2D,  the matrix elements of Hamiltonian matrix simplifies to
+\begin{equation}
+    H_{ij} = \begin{cases}
+        -\tilde{t}_{ij} & \mbox{if $i$ and $j$ are nearest neighbors} \\
+        z t + U_i & i = j \\
+        0 & \mbox{otherwise}
+    \end{cases}
+\end{equation}
+where $z$ is the coordination number (number of nearest neighbors) of the lattice. For a square lattice, $z=4$. If the vector potential is zero, then the nearest neighbor coupling is equal to $-t$ as in the 1D example. With a non-zero vector potential it is modified to
+\begin{equation}
+    \tilde{t}_{ij} = t \exp\left(\frac{\ii e}{\hbar} \int_{\vec{r}_i}^{\vec{r}_j} \vec{A}(\vec{r}) \cdot \dd \vec{r} \right) \approx t \exp\left(\frac{\ii e}{\hbar} \vec{A}\left(\frac{\vec{r}_i + \vec{r}_j}{2}\right) \cdot (\vec{r}_j - \vec{r}_i) \right)
+\end{equation}
+\subsection{Truncating the matrix}
+Now that we have a matrix representation for the Hamiltonian operator it may seem straightforward to set up the matrix $[(E+\ii \eta)I - H]$ and invert it.
+\begin{equation}
+    G^R = \left[(E+\ii \eta)I - H \right]^{-1}
+\end{equation}
+If we simply truncate the matrix to a finite size, we would effectively be describing a closed system with fully relfecting boundaries and not the open system with non-reflecting boundaries that we would like to describe. Consider a conductor connected to the lead $p$ as shown in Fig.3.5.2. We can partition the overall Green's function into submatrices as follows:
+\begin{equation}
+    \begin{bmatrix}
+        G_p & G_{pC} \\
+        G_{Cp} & G_C
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        (E+\ii \eta)I - H_p & \tau_{p} \\
+        \tau_{p}^\dagger & EI - H_C
+    \end{bmatrix}^{-1}
+\end{equation}
+where the matrix $[(E + \ii \eta)I - H_p]$ represents the isolated lead, while the matrix $[EI - H_C]$ represents the isolated conductor. We could add an infinitesimal imaginary term ($\ii \eta$) as well but it is not necessary. The coupling matrix is non-zero only for adjecent points $i$ and $p_i$
+\begin{equation}
+    \tau_p(i,p_i) = t
+\end{equation}
+The submatrix $G_C$ represents the Green's function for the conductor taking into account its coupling to the lead $p$. From the definition of the inverse of a matrix, we have
+\begin{equation}
+    [(E+\ii \eta)I - H_p]G_{pC} + [\tau_p] G_C = 0
+\end{equation}
+\begin{equation}
+    [EI - H_C] G_C + [\tau_p^\dagger] G_{pC} = I
+\end{equation}
+From the first equation, we obtain
+\begin{equation}
+    G_{pC} = -g^R_p \tau_p G_C, \quad g^R_p = \left[(E+\ii \eta)I - H_p \right]^{-1}
+\end{equation}
+$g^R_p$ is the Green's function for the isolated semi-infinite lead $p$. Substituting this into the second equation, we obtain
+\begin{equation}
+    G_C = \left[EI - H_C - \tau^\dagger_p g^R_p \tau_p \right]^{-1}
+\end{equation}
+Note that the matrices in this expression are finite matrices of dimensions $(C\times C)$, $C$ being the number of points inside the conductor. The effect of the semi-infinite lead is included through the self-energy term
+\begin{equation} 
+    \Sigma^R_p = \tau^\dagger_p g^R_p \tau_p
+\end{equation}
+with zero vector potential, $\tau_p = -t$, we have
+\begin{equation}
+    G^R = G_C = [EI - H_C - \Sigma^R]^{-1}, \quad \Sigma^R = \sum_p \Sigma^R_p, \quad \Sigma^R_p(i,j) = t^2 g^R_p(p_i, p_j)
+\end{equation}
+\subsection{Self-energy}
+For a semi-infinite discrete wire it can be shwon that the Green's function between two points along the edge is given by
+\begin{equation}
+    g^R_p(p_i, p_j) = -\frac{1}{t}\sum_{m}\chi_m(p_i)\exp(\ii k_m a) \chi_m(p_j)
+\end{equation}
+where the (real) function $\chi_m(p_i)$ describes the transverse profile of mode $m$ in lead $p$ and $v_m$ is its velocity. Substituting this into the expression for the self-energy, we obtain
+\begin{equation}
+    \Sigma^R_p(i,j) = -t \sum_m \chi_m(p_i) \exp(\ii k_m a) \chi_m(p_j)
+\end{equation}
+\subsection{Transmission function}
+Use the Fisher-lee relation, we can write the transmission function between lead $p$ and lead $q$ as
+\begin{equation}\label{eq:transmission_green}
+    \overline{T}_{qp} = \trace \left[ \Gamma_q G^R \Gamma_p G^A \right]
+\end{equation}
+where
+\begin{equation}
+    \Gamma_p = \sum_m \chi_m(p_i)\frac{\hbar v_m}{a} \chi_m(p_j) = \ii \left[\Sigma^R_p - \Sigma^A_p \right], \quad \Sigma^A_p = \left[\Sigma^R_p\right]^\dagger
+\end{equation}
+\begin{proof}
+    From the Fisher-lee relation, we have
+    \begin{equation}
+        s_{nm} = -\delta_{nm} + \ii \hbar \sqrt{v_n v_m} \int \dd y_q \int \dd y_p \chi_n(y_q) G^R_{qp}(y_q; y_p) \chi_m(y_p)
+    \end{equation}
+    We can write for $n \neq m$
+    \begin{equation}
+        \abs{s_{nm}}^2 = \frac{\hbar^2 v_n v_m}{a^2} \sum_{i,j,i',j'} \chi_n(q_j) G^R(j,i) \chi_m(p_i) \chi_n(q_{j'})G^A(i',j') \chi_m(p_{i'})
+    \end{equation}
+    where we have made use of the relation $\int \dd y_q \to a \sum_j$ and $\int \dd y_p \to a \sum_i$ and $G^A = [G^R]^*$. Summing over all modes in lead $p$ and lead $q$, we obtain
+    \begin{equation}
+        \begin{aligned}
+            \overline{T}_{qp} & = \sum_{m \in p} \sum_{n \in q} \abs{s_{nm}}^2 \\
+            & = \frac{\hbar^2}{a^2} \sum_{i,j,i',j'} G^R(j,i) \left[\sum_{n \in q} v_n \chi_n(q_j) \chi_n(q_{j'}) \right] G^A(i',j') \left[\sum_{m \in p} v_m \chi_m(p_i) \chi_m(p_{i'}) \right] \\
+            & = \trace \left[ \Gamma_q G^R \Gamma_p G^A \right]
+        \end{aligned}
+    \end{equation}
+    where \begin{equation}
+        \Gamma_p(i,i') = \sum_{m \in p} \chi_m(p_i) \frac{\hbar v_m}{a} \chi_m(p_{i'}), \quad \Gamma_q(j,j') = \sum_{n \in q} \chi_n(q_j) \frac{\hbar v_n}{a} \chi_n(q_{j'})
+    \end{equation}
+\end{proof}
+The Green's function $G^R$ describes the dynamics of the electrons inside the conductor, taking the effect of the leads into account through the self-energy terms. The function $\Gamma$ describes the coupling between the conductor and the leads.
+\subsection{Sum rule}
+Earlier in this chapter, we derived a sum rule for the transimission function
+\begin{equation}
+    \sum_q \overline{T}_{pq} = \sum_q \overline{T}_{qp} = M_p
+\end{equation}
+where $M_p$ is the number of modes in lead $p$. This sum rule ensures current conservation. We can derive a similar sum rule in terms of the spectral function.
+\begin{equation}
+    \begin{aligned}
+       \sum_q \overline{T}_{pq} = \trace[\Gamma_p G^R (\sum_q \Gamma_q) G^A] = \trace[\Gamma_p G^R \Gamma G^A] \\
+       \sum_q \overline{T}_{qp} = \trace[\sum_q \Gamma_q G^R \Gamma_p G^A] = \trace[\Gamma G^R \Gamma_p G^A]
+    \end{aligned}
+\end{equation}
+where
+\begin{equation}
+    \Gamma = \sum_q \Gamma_q = \sum_q \ii [\Sigma^R_q - \Sigma^A_q] = \ii [\Sigma^R - \Sigma^A]
+\end{equation}
+we obtain the desired sum rule
+\begin{equation}
+    \sum_q \overline{T}_{pq} = \sum_q \overline{T}_{qp} = \trace[\Gamma_p A] = M_p
+\end{equation}
+if we make use of the following identity:
+\begin{equation}
+    A \equiv \ii [G^R - G^A] = G^R \Gamma G^A = G^A \Gamma G^R
+\end{equation}
+    The quantity $A$ is called the spectral function. It describes the density of states inside the conductor taking into account the coupling to the leads.
+
+\section{Self-energy}
+We have seen in the last section that the Green's function which is defined as
+\begin{equation}
+    G^R = \left[E -H + \ii \eta \right]^{-1}
+\end{equation}
+can be modified to take into account the effect of the leads by introducing a self-energy term $\Sigma^R$:
+\begin{equation}
+    G^R = \left[E - H_C - \Sigma^R \right]^{-1}
+\end{equation}
+Where $H_C$ is the Hamiltonian matrix for the isolated conductor, and the self-energy $\sigma^R$ describes the effect of the leads on the conductor. This is an important conceptual step, for it allows us to replace an infinite open system with a finite one. There are two important concepts defined by the relationship
+\begin{equation}
+    \Gamma \equiv \ii \left[\Sigma^R - \Sigma^A \right]
+\end{equation}
+\begin{equation}
+    A \equiv \ii \left[G^R - G^A \right]
+\end{equation}
+and derive a useful relationship between them:
+\begin{equation}
+    A = G^R \Gamma G^A = G^A \Gamma G^R
+\end{equation}
+which is the analog of the unitarity relation
+\begin{equation}
+    I = S S^\dagger = S^\dagger S
+\end{equation}
+\subsection{Eigenstate lifetime}
+In isolated or closed systems whose eigenstates are found by diagonalizing the Hamiltonian $H_C$:
+\begin{equation}
+    H_C \psi_{\alpha,0} = \epsilon_{\alpha,0} \psi_{\alpha,0}
+\end{equation}
+Taking the coupling to the leads into account through the self-energy term, the eigenstates are found by diagonalizing the effective Hamiltonian
+\begin{equation}
+        H_{eff} = H_C + \Sigma^R,\quad \left[ H_C + \Sigma^R \right]\psi_\alpha = \epsilon_\alpha \psi_\alpha
+\end{equation}
+There is an important difference between these two sets of eigenstates. The eigenvalues $\epsilon_{\alpha,0}$ of the isolated conductor are real, while the eigenvalues $\epsilon_\alpha$ of the open conductor are complex, since the self-energy is in general not Hermitian. We could write the new eigenenergies as 
+\begin{equation}
+    \epsilon_\alpha = \epsilon_{\alpha,0} - \Delta_\alpha - \ii (\gamma_\alpha/2)
+\end{equation}
+where $\epsilon_{\alpha,0}$ is the eneegy of the isolated conductor described by $H_C$. The time dependence of an eigenstate of $H_{eff}$ is given by
+\begin{equation}
+    \psi_\alpha(t) = \psi_\alpha(0) \exp\left(-\frac{\ii \epsilon_\alpha t}{\hbar}\right) = \psi_\alpha(0) \exp\left(-\frac{\ii (\epsilon_{\alpha,0} - \Delta_\alpha) t}{\hbar}\right) \exp\left(-\frac{\gamma_\alpha t}{2 \hbar}\right)
+\end{equation}
+$\Delta_\alpha$ represents a shift in the energy of the eigenstate due to the coupling to the leads, while $\gamma_\alpha$ represents a finite lifetime of the eigenstate due to escape into the leads. 
+\begin{equation}
+    \abs{\psi_\alpha(t)}^2 = \abs{\psi_\alpha(0)}^2 \exp\left(-\frac{\gamma_\alpha t}{\hbar}\right)
+\end{equation}
+The lifetime is given by $\tau_\alpha = \hbar/\gamma_\alpha$, which is infinite if the self-energy is Hermitian, that is, if $\Gamma = 0$.
+\subsection{Eigenfunction expansion}
+We can use the eigenfunctions of the effective Hamiltonian $H_{eff}$ to expand the Green's function as follows:
+\begin{equation}
+    G^R(\vec{r}, \vec{r}') = \sum_\alpha \frac{\psi_\alpha(\vec{r}) \psi_\alpha^\dagger(\vec{r}')}{E - \epsilon_\alpha}
+\end{equation}
+if we define $\psi_\alpha$ as the eigenstate of $H_{eff}$.
+\begin{equation}
+    \left[ H_C + \Sigma^R \right] \psi_\alpha = \epsilon_\alpha \psi_\alpha
+\end{equation}
+It is not correct for the effective Hamiltonian is not Hermitian. Hence the eigenstates are not orthogonal in the usual sense. Instead, we need to introduce the concept of bi-orthogonality. We define the left eigenstates $\phi_\alpha$ as the eigenstates of the Hermitian conjugate of the effective Hamiltonian:
+\begin{equation}
+    \left[ H_C + \Sigma^A \right] \phi_\alpha = \epsilon_\alpha^* \phi_\alpha
+\end{equation}
+The left and right eigenstates satisfy the bi-orthogonality condition
+\begin{equation}
+    \int \phi_\alpha(\vec{r}) \psi_\beta^*(\vec{r}) \dd \vec{r} = \delta_{\alpha \beta}
+\end{equation}
+With this definition, we can expand the Green's function as
+\begin{equation}
+    G^R(\vec{r}, \vec{r}') = \sum_\alpha \frac{\psi_\alpha(\vec{r}) \phi_\alpha^*(\vec{r}')}{E - \epsilon_\alpha}
+\end{equation}
+\subsection{Spectral function}
+We can write the spectral function in terms of the eigenstates of the effective Hamiltonian as follows:
+\begin{equation}
+    \begin{aligned}
+        A(\vec{r}, \vec{r}') & = \ii \left[G^R(\vec{r}, \vec{r}') - G^A(\vec{r}, \vec{r}') \right] \\
+        & = \sum_\alpha \psi_\alpha(\vec{r}) \phi_\alpha^*(\vec{r}') \left[ \frac{\ii}{E - \epsilon_\alpha} - \frac{\ii}{E - \epsilon_\alpha^*} \right] \\
+        & = \sum_\alpha \psi_\alpha(\vec{r}) \phi_\alpha^*(\vec{r}') \frac{\gamma_\alpha}{(E - \epsilon_{\alpha 0} + \Delta_\alpha)^2 + (\gamma_\alpha/2)^2}
+    \end{aligned}
+\end{equation}
+The spectral function evolves as the coupling to the leads is increased is illustrated in Fig.3.6.2. The self-energy $\Sigma^R$ becomes larger and the shifts the eigenenergies. As a result, the peaks of the quantity $A(\vec{r}, \vec{r})$ shift by $\Delta_\alpha$ and broaden by an amount $\gamma_\alpha$. When the coupling is very large, the peaks all merge and the peaks corresponding to different eigenstates can no longer be distinguished. \\
+The trace of the spectral function represents the density of states:
+\begin{equation}
+    N(E) = \frac{1}{2 \pi} \trace{A(E)}
+\end{equation}
+\begin{equation}
+    \trace{A} \equiv \int A(\vec{r}, \vec{r}) \dd \vec{r} = \sum_\alpha \frac{\gamma_\alpha}{(E - \epsilon_{\alpha 0} + \Delta_\alpha)^2 + (\gamma_\alpha/2)^2}
+\end{equation}
+thus the density of states can be written as 
+\begin{equation}
+    \begin{aligned}
+    N(E) & = \sum_\alpha \frac{1}{2 \pi} \frac{\gamma_\alpha}{(E - \epsilon_{\alpha 0} + \Delta_\alpha)^2 + (\gamma_\alpha/2)^2} \\
+    & \xrightarrow{\gamma_\alpha \to 0} \sum_\alpha \delta(E - \epsilon_{\alpha 0} + \Delta_\alpha)
+    \end{aligned}
+\end{equation} 
+\subsection{Local density of states}
+The diagonal elements of the spectral function give the local density of states
+\begin{equation}
+    \begin{aligned}
+    \rho(\vec{r},E) & = \frac{1}{2 \pi} A(\vec{r},\vec{r}, E) = -\frac{1}{\pi}\Im[G^R(\vec{r},\vec{r},E)] \\
+    & \sim \sum_\alpha \frac{1}{2 \pi} \frac{\gamma_\alpha}{(E - \epsilon_{\alpha 0} + \Delta_\alpha)^2 + (\gamma_\alpha/2)^2} \psi_\alpha(\vec{r}) \phi_\alpha^*(\vec{r}) \\
+    & \to \sum_\alpha \delta(E - \epsilon_{\alpha 0}) \abs{\psi_\alpha(\vec{r})}^2, \quad \gamma_\alpha \to 0
+    \end{aligned}
+\end{equation}
+\subsection{A useful identity}
+There is a useful identity involving the spectral function that is often used in quantum transport calculations:
+\begin{equation}
+    A = G^R \Gamma G^A = G^A \Gamma G^R
+\end{equation}
+\begin{proof}
+    \begin{equation}
+        [G^R]^{-1} - [G^A]^{-1} = \left[E - H_C - \Sigma^R \right] - \left[E - H_C - \Sigma^A \right] = \Sigma^A - \Sigma^R = \ii \Gamma
+    \end{equation}
+    Multiplying by $G^R$ from the left and by $G^A$ from the right, we obtain
+    \begin{equation}
+        G^A - G^R = \ii G^R \Gamma G^A \to A = G^R \Gamma G^A
+    \end{equation}
+    Similarly, multiplying by $G^A$ from the left and by $G^R$ from the right, we obtain
+    \begin{equation}
+        G^A - G^R = \ii G^A \Gamma G^R  \to A = G^A \Gamma G^R
+    \end{equation}
+\end{proof}
+\section{Relation to other formalism}
+The transimission function $\overline{T}_{pq}$ from lead $q$ to lead $p$ can be written in terms of the Green's function as
+\begin{equation}
+    \overline{T}_{pq} = \trace \left[ \Gamma_p G^R \Gamma_q G^A \right]
+\end{equation}
+The Green's function $G^R$ describes the dynamics of the electrons inside the conductor (taking the leads into account), while the $\Gamma_p$ describes the strength of the coupling of lead $p$ to the conductor.
+\subsection{Kubo formalism}
+The Kubo formalism is based on the fluctuation-dissipation theorem which relates the equilibrium noise (that is, fluctuatios) to the linear response conductance (that is, dissipation). A special case of this general theorem is the Nyquist-Johnson formula
+\begin{equation}
+    G = \frac{1}{2 k_B T} \int_{-\infty}^{\infty} \langle I(t+t_0) I(t_0) \rangle_{eq} \dd t
+\end{equation}
+This relationship allows us to calculate a non-equilibrium property like conductance indirectly by calculating the equilibrium noise using the methods of equilibrium statictical mechanics. The Kubo formula is commonly used to derive the following expression for the zero temperature conductivity of a uniform rectangular conductor with all sides equal to $L$ ($d$ is number of dimensions and all quantities are evaluated at the Fermi energy)
+\begin{equation}
+    \sigma = \frac{2 e^2}{h} \frac{\hbar^2}{L^d} \sum_{k,k'} v_x(k') v_x(k) \abs{G^R(k',k)}^2
+\end{equation}
+is used as the starting point for calculating the ensemble-averaged conductivity of large conductors. We can write the condunctance as 
+\begin{equation}
+    G = \frac{\sigma L^{d-1}}{L} = \frac{2 e^2}{h} \frac{\hbar^2}{L^2} \sum_{k,k'} v_x(k') v_x(k) \abs{G^R(k',k)}^2
+\end{equation}
+which follows the Landauer formula $G = (2e^2/h)\overline{T}$ with the transmission function \ref{eq:transmission_green}. Although \ref{eq:transmission_green} was derived using a discrete lattice in real space, we can use a unitary transformation to transform it to any other convenient representation. For example in the $k$-representation, we have
+\begin{equation}
+    G = \frac{2 e^2}{h} \sum_{k_1,k_2,k,k'} \Gamma_1(k_1,k') G^R(k',k) \Gamma_2(k,k_2) G^A(k_2,k_1)
+\end{equation}
+Note that the terms in this summation with $k_1 = k'$ and $k_2 = k$
+\begin{equation}
+    \Gamma_1(k',k') G^R(k',k) \Gamma_2(k,k) G^A(k,k')
+\end{equation}
+are all positive real quantities since $G^A(k,k') = G^R(k',k)^*$ and the diagonal elements of $\Gamma$ are real since $\Gamma$ is Hermitian. By contrast the other terms with $k_1 \neq k$ and $ k_2 \neq k'$ are complex quantities with randomly varying phases that average out to zero, and can be omitted from the summation. Hence we obtain
+\begin{equation}
+    G = \frac{2 e^2}{h} \sum_{k,k'} \Gamma_1(k',k') \abs{G^R(k',k)} \Gamma_2(k,k)
+\end{equation}
+This is identical to the result we are trying to prove if 
+\begin{equation}
+    \Gamma_1(k',k') = \Gamma_2(k,k) = \frac{\hbar v_x(\vec{k})}{L}
+\end{equation}
+We will now justify this expression for $\Gamma$ for a uniform conductor with two identical leads. The physical significance of the function $\Gamma_p(k,k)$ is that it represents $\hbar/2$ times the rate at which an electron placed in a state $k$ will escape into lead $p$. From this point of view, the equation above is reasonable since the electron wavefunction is spread out over a box of length $L$ and the electron can only escape through the two surfaces with a velocity $v_x$, the rate of escape is given by $2 v_x/L$, so that 
+\begin{equation}
+    \Gamma_p(k,k) = \frac{\hbar}{2} \frac{2 v_x(k)}{L} = \frac{\hbar v_x(k)}{L}
+\end{equation}
+Consider a 1D conductor with $N$ sites as shown in Fig.3.7.1. The only non-zero components of the self-energy involve the end-points. Assuming both leads to be identical we can write
+\begin{equation}
+    \Gamma_1(1,1) = \frac{\hbar v}{2} = \Gamma_2(N,N)
+\end{equation}
+Now we transform from the site representation to a $k$-representation using the unitary transformation
+\begin{equation}
+    \ket{k} = \frac{1}{\sqrt{N}} \sum_j \exp(-\ii k x_j) \ket{j}
+\end{equation}
+Using the usual rules for matrix transformation
+\begin{equation}
+    \Gamma_p(k,k) = \sum_{i,j} \braket{k|i} \Gamma_p(i,j) \braket{j|k} = \frac{1}{N} \sum_{i,j} \exp(-\ii k x_i) \Gamma_p(i,j) \exp(\ii k x_j)
+\end{equation}
+we obtain (note that $L = Na$)
+\begin{equation}
+    \Gamma_1(k,k) = \frac{1}{N} \Gamma_1(1,1) = \frac{\hbar v}{2 N} = \frac{\hbar v}{L} = \Gamma_2(k,k)
+\end{equation}
+Extend this result beyond 1D, we obtain the desired result
+\begin{equation}
+    \Gamma_1(m,k;m,k) = \frac{\hbar v_m}{L} = \Gamma_2(m,k;m,k)
+\end{equation}
+\subsection{Transfer Hamiltonian formalism}
+The transfer Hamiltonian formalism is widely used to describe tunneling processes involving electron transfer between two leads separated by an insulator (Fig.3.7.2). In the transfer Hamiltonian formalism the current is related to the matrix elements, M, between lead 1 and lead 2
+\begin{equation}
+    I = \frac{4 \pi e}{\hbar} \int \left[ f_1(E) - f_2(E) \abs{M(E)}^2 \rho_1(E)\rho_2(E) \right] \dd E
+\end{equation}
+where $\rho_1(E)$ and $\rho_2(E)$ are the density of states in lead 1 and lead 2 respectively. The change in the current in response to a change in the potential $\mu_2$ (keeping $\mu_1$ constant) can be written as 
+\begin{equation}
+    \pdv{I}{\mu_2} = \frac{4 \pi e}{\hbar} \left[ \abs{M(E)}^2 \rho_1(E)\rho_2(E) \right]_{E = \mu_2}
+\end{equation}
+where we have assumed low temperature (so that $f_2(E)\approx \theta(\mu_2-E)$) and also neglected any change in $M$, $\rho_1$ and $\rho_2$ due to the applied bias. Relating the slope of the current-voltage curve to the density of states in the leads allows one to use current-voltage measurements to deduce the density of states $rho_2(E)$ in one lead if the density of states $\rho_1(E)$ in the other lead is known. In scattering formalism the current is given by
+\begin{equation}
+    I = \frac{2 e}{h} \int \overline{T}(E) \left[f_1(E) - f_2(E) \right] \dd E
+\end{equation}
+Thus we have
+\begin{equation}
+    \overline{T}(E) = 4 \pi^2 \abs{M(E)}^2 \rho_1(E) \rho_2(E)
+\end{equation}
+\section{Feynman paths}
+In this section we show how the Green's function can be visualized in terms of Feynman paths. The Green's function is given by the inverse of the matrix
+\begin{equation}
+    G^R = \left[E - H + \ii \eta \right]^{-1}
+\end{equation}
+The basic idea is to write the maatrix $[G^R]^{-1}$ as a sum of two matrices
+\begin{equation}
+    [G^R]^{-1} = [G_0]^{-1} - \alpha
+\end{equation}
+one of which represents the unperturbed system ($G_0^{-1}$) and the other represents the perturbation ($\alpha$). We can write 
+\begin{equation}
+    G^R = \left[G_0^{-1} - \alpha \right]^{-1} = \left[G_0^{-1} (I - G_0 \alpha)\right]^{-1} = (I - G_0 \alpha)^{-1} G_0
+\end{equation}
+The inverse can be expanded in an infinite geometric series to obtain the following expression for $G$.
+\begin{equation}
+    G^R = \left[I + G_0 \alpha + (G_0 \alpha)^2 + (G_0 \alpha)^3 + \cdots \right] G_0 = G_0 + G_0 \alpha G_0 + G_0 \alpha G_0 \alpha G_0 + \cdots
+\end{equation}
+Consider the element $(i,j)$ of one of the terms in this series:
+\begin{equation}
+    G_0(i,i) \alpha(i,A) G_0(A,A) \alpha(A,j) G_0(j,j)
+\end{equation}
+We could visualize this term as the amplitude of a 'path' going from $j$ to a point $A$ and then on to $i$. The total Green's function $G^R(i,j)$ is equal to the sum of the amplitudes of all such paths leading from $j$ to $i$
+\begin{equation}
+    G^R(i,j) = \sum_P A_P(i,j), \quad P \in \mbox{all paths from $j$ to $i$}
+\end{equation}
+Each path is composed of series of segments which alternately involve unperturbed propagation (described by $G_0$) and a transition induced by the perturbation (described by $\alpha$). The choice of $G_0$ and $\alpha$ is clearly not unique and has to be motivated by the physics of the problem at hand. For example, suppose we associate the unperturbed part with the diagonal elements of $H_C$
+\begin{equation}
+    [G_0^{-1}]_{ij} = (E - U_i - 2t)\delta_{ij}
+\end{equation}
+then $G_0$ represents the Green's function for a set of isolated lattice sites:
+\begin{equation}
+    [G_0]_{ij} = \frac{\delta_{ij}}{E - U_i - 2t}
+\end{equation}
+The perturbation consists of the hopping matrix element connecting adjacent sites:
+\begin{equation}
+    \alpha_{ij} = t \exp[\ii e \vec{A} \cdot (\vec{r}_i - \vec{r}_j)/\hbar] \quad \mbox{if $i$ and $j$ are nearest neighbors}
+\end{equation}
+We are neglecting the effect of the leads which is represented by the self-energy term $\Sigma^R$. With this choice of $G_0$ and $\alpha$, a Feynman path has the form shown in Fig.3.8.1.
+
+\subsection{Aharonov-Bohm (A-B) effect}
+Using a small ring 820nm in diameter etched out of a high quality gold film. The conductance of the ring was observed to oscillate as a function of the magnetic flux enclosed by the ring.
+\begin{equation}
+    G = G_0 + \hat{G}\cos\left(\frac{\abs{e}B S}{\hbar} + \overline{\phi}\right) \mbox{($S\equiv $area enclosed by ring)}
+\end{equation}
+The period $B_p$ of the oscillations is obtained by the setting the phase difference to $2\pi$
+\begin{equation}
+    \frac{\abs{e}B S}{\hbar} = 2 \pi \Rightarrow B_p S = h/\abs{e}
+\end{equation}
+This is called the $h/e$ effect since the period corresponds to a change in the enclosed flux by $h/e$. The transmission from mode $m$ in lead 1 to mode $n$ in lead 2 can be written as 
+\begin{equation}
+    T(n\leftarrow m) \rightarrow \abs{t_1+t_2}^2
+\end{equation}
+where $t_1$ is the total amplitude of all the Feynman paths going through the upper arm of the ring that start in mode $m$ at $A$ and end in mode $n$ at $B$. Similarly $t_2$ is the total amplitude of all the paths going through the lower arm of the ring that start in mode $m$ at $A$ and end in mode $n$ at $B$. The oscillations in the conductance arise because a vector potential changes the phase relationship between $t_1$ and $t_2$. The conductance peaks whenever $t_1$ and $t_2$ are in phase. The amplitude associated with a path connecting two nearest neighbors $i$ and $j$ is modified as follows
+\begin{equation}
+    \alpha_{ij} = t\exp\left[\ii e \vec{A}\cdot (\vec{r_i}-\vec{r_j})/\hbar \right]
+\end{equation}
+Consequently the vector potential $\vec{A}$ introduces an extra phase to every path:
+\begin{equation}
+    t_1(B)\sim t_1(0) \exp(\ii \phi_1),\quad  t_2(B) \sim t_2(0) \exp(\ii \phi_2)
+\end{equation}
+where
+\begin{equation}
+    \phi_1 = \frac{e}{\hbar} \int_{\mbox{path 1}} \vec{A} \cdot \dd \vec{l}, \quad \phi_2 = \frac{e}{\hbar} \int_{\mbox{path 2}} \vec{A} \cdot \dd \vec{l}
+\end{equation}
+We are assuming that the ring is thin enough that there is not much difference between the area enclosed by the inner and the outer circumference. The difference between the two phases is proportional to the flux enclosed by the ring:
+\begin{equation}
+    \phi_1-\phi_2 = \frac{\abs{e}}{\hbar} \oint \vec{A} \cdot \dd \vec{l} = \frac{\abs{e} B S}{\hbar}
+\end{equation}
+($B$: magnetic field and $S$: area enclosed by ring). Hence
+\begin{equation}
+    T(n\leftarrow m) = \abs{t_1(0) e^{\ii \phi_1} + t_2(0) e^{\ii \phi_2}}^2 = \abs{t_1(0)}^2 + \abs{t_2(0)}^2 + 2 \abs{t_1(0) t_2(0)} \cos\left(\frac{\abs{e} B S}{\hbar} + \phi\right)
+\end{equation}
+
+\chapter{Quantum Hall effect}
 
 \end{document}
+

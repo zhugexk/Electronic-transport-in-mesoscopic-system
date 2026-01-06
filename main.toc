@@ -56,4 +56,30 @@
 \contentsline {section}{\numberline {3.2}Combining S-matrices}{32}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Feynman paths}{33}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Combining successive sections incoherent}{33}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Combining successive sections with partial coherence}{34}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Green's functions:a brief introduction}{34}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Retarded and advanced Green's functions}{34}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}The infinitesimal}{35}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Green's function for a multi-moded wire}{36}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Eigenfuction expansion}{36}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}S-matrix and the Green's function}{37}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Multi-moded leads}{38}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Tight-binding model(or the method of finite differences)}{38}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Matrix representation for the Hamiltonian operator in 1D}{38}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Dispersioin relation fro a discrete lattice}{39}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Matrix representation for the Hamiltonian operator in 2D}{40}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Truncating the matrix}{40}{subsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.5.5}Self-energy}{41}{subsection.3.5.5}%
+\contentsline {subsection}{\numberline {3.5.6}Transmission function}{41}{subsection.3.5.6}%
+\contentsline {subsection}{\numberline {3.5.7}Sum rule}{42}{subsection.3.5.7}%
+\contentsline {section}{\numberline {3.6}Self-energy}{42}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Eigenstate lifetime}{43}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Eigenfunction expansion}{43}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Spectral function}{44}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Local density of states}{44}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}A useful identity}{44}{subsection.3.6.5}%
+\contentsline {section}{\numberline {3.7}Relation to other formalism}{45}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Kubo formalism}{45}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Transfer Hamiltonian formalism}{46}{subsection.3.7.2}%
+\contentsline {section}{\numberline {3.8}Feynman paths}{47}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Aharonov-Bohm (A-B) effect}{48}{subsection.3.8.1}%
+\contentsline {chapter}{\numberline {4}Quantum Hall effect}{49}{chapter.4}%
