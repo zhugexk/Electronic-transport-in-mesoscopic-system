@@ -64,7 +64,7 @@
 %-------------------------
 % Document metadata
 %-------------------------
-\title{Execise 2}
+\title{Execise 3}
 \author{Zhuge X.K.}
 \date{\today}
 
@@ -85,10 +85,56 @@ Consider a slightly simplified form of the structure shown in Fig. 4.2.2 as show
     as reasoned in the text.
 \end{enumerate}
 
+\begin{proof}
+    The conductance matrix can be written as
+    \begin{equation}
+        \begin{matrix}
+            G_{pq} & q = 1 & q = 2 & q = 3 & q = 4 \\
+            p = 1 & 0 & pG_C & (1-p)G_C & 0 \\
+            p = 2 & G_C & 0 & 0 & 0 \\
+            p = 3 & 0 & 0 & pG_C & (1-p)G_C \\
+            p = 4 & 0 & (1-p)G_C & 0 & pG_C
+        \end{matrix}
+    \end{equation}
+    where $G_C = \frac{2e^2}{h}M$, and $p$ is the probability that an edge state is backscattered. For the terminal 2,3 are voltage probes, we have $I_2 = I_3 = 0$, thus $V_2 = V_1, V_3 = V_4$.
+    \begin{equation}
+        I_1 = I = pG_C (V_1 - V_2) + (1-p) G_C(V_1 - V_3) = (1-p)G_C(V_2 - V_3)
+    \end{equation}
+    Hence we have
+    \begin{equation}
+        R_H = \frac{V_2 - V_3}{I} = \frac{h}{2e^2 M}\frac{1}{1-p}
+    \end{equation}
+\end{proof}
+
 \section*{Exercise 2.2(E.4.2, page 194)}
 Consider the same structure as in E.4.1 but with an extra terminal '5' inserted, as shown in Fig.E.4.2. Write down the conductance matrix for this sturcture and show that the Hall resistance is now given by
 \[
     R_H = \frac{V_2-V_3}{I} = \frac{h}{2e^2 M}
 \]
 The extra terminal establishes an equilibrium between the edge states and changes the Hall resistance. This is a rather surprising result which has been observed experimentally. In macroscopic conductors, we do not expexted an extra floating probe('5') to affect the measurement.
+\begin{proof}
+    \begin{equation}
+        \begin{matrix}
+            G_{pq} & q = 1 & q = 2 & q = 3 & q = 4 & q = 5 \\
+            p = 1 & 0 & 0 & (1-p)G_C & 0 & pG_C \\
+            p = 2 & G_C & 0 & 0 & 0 & 0 \\
+            p = 3 & 0 & 0 & pG_C & 0 & (1-p)G_C \\
+            p = 4 & 0 & (1-p)G_C & 0 & pG_C & 0 \\
+            p = 5 & 0 & pG_C & 0 & (1-p)G_C & 0
+        \end{matrix}
+    \end{equation}
+    Setting $V_4 = 0$ as the ground, and $I_2 = I_3 = I_5 = 0$
+    \begin{equation}
+        \begin{aligned}
+            & I_2 = 0 = G_C(V_2 - V_1) \rightarrow V_2 = V_1 \\
+            & I_3 = 0 = (1-p)G_C(V_3 - V_5)\rightarrow V_3 = V_5 \\
+            & I_5 = 0 = pG_C(V_5 - V_2) + (1-p)G_C(V_5 - V_4) \rightarrow V_5 = (1-p)V_4 + pV_2 = pV_2 \\ 
+            & I_1 = I = pG_C(V_1 - V_5) + (1-p)G_C(V_1 - V_3) = G_C(V_1 - V_5)
+        \end{aligned}
+    \end{equation}
+    Thus we have
+    \begin{equation}
+        R_H = \frac{V_2 - V_3}{I} = \frac{1}{G_C} = \frac{h}{2e^2 M}
+    \end{equation}
+\end{proof}
 \end{document}

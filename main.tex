@@ -2115,6 +2115,145 @@ We are assuming that the ring is thin enough that there is not much difference b
 \end{equation}
 
 \chapter{Quantum Hall effect}
+At high magnetic fields the Hall resistance has been observed to be quantized in units of $h/e^2$ with an accuracy that is specified in parts per million. This impressive accuracy arises from the near complete suppression of momentum relaxation processes in the quantum Hall regime, resulting in a truly ballistic conductor of incredibly high quality. Mean free paths of several millimeters have been observed, arising from that at high magnetic fields the electronic states carrying current in one direction are localized on one side of the sample while those carrying current in the other direction are localized on the other side of the sample.
+\section{Origin of 'zero' resistance}
+We know that at high magnetic fields the longitudinal resistance (measured using a macroscopic Hall bridge) oscillates as a function of the magnetic field. The density of states at high magnetic fields develops sharp peaks spaced by $\hbar \omega_c$ and the resistivity oscillates as the position of these peaks is changed relative to the Fermi energy. This can be done either by changing the magnetic field or by keeping the magnetic field fixed and changing the electron density (and hence the Fermi energy) by means of a gate voltage.\\
+Intuitively it might appear that the resistance should be a minimum whenever the Fermi energy coincides with a peak in the density of states, that is, with a Landau level. However, the correct answer is just the opposite. The resistance is a minimum when the Fermi energy lies between two Landau levels so that the density of states at the Fermi energy is a minimum! But how does a smaple carry any current unless there are states at the Fermi energy? The answer is that there are states at the Fermi energy which are located near the edges of the smaple. 
+An important point to note from Fig.1.4.2 is that at the minima the resistance is very nearly zero. This is particularly surprising since the voltage probes are typically spaced by hundreds of microns. The fact that the resistance is so close to zero shows that the electrons are able to travel such huge distances without losing their momentum. Clearly something rather special must be happening at microscopic level leading to this fantastic supperssion of momentum relaxation processes.
+In Section 1.6, while increasing the magnetic field in a finite-width conductor, the states carrying current in one direction get spatially separated from the states carrying current in the opposite direction. The result is a significant reduction in the spatial overlap between the forward and the backward propagating states which leads to a suppression of backscattering (and hence momentum relaxation). Indeed at high magnetic fields the forward and backward propagating states are spatially separated by the witdth of the conductor and thus have practically zero overlap in wide conductors.
+In Section 1.6 we assumed a parabolic confining potential $U(y) = m\omega_0^2 y^2/2$. This allowed us to obtain the eigenfunctions of the Schrodinger equation
+\begin{equation}
+    \left[E_s + \frac{(\ii \hbar \nabla + e \vec{A})^2}{2m} + U(y)\right]\Psi(x,y) = E\Psi(x,y)
+\end{equation}
+analytically. A parabolic potential often provides a good description of narrow quantum wires. But for wide conductors, the transverse confining potential usually looks more like that shown in Fig.4.1.1a. In general, analytical solutions are not available for arbitrary confining potentials. However, there is an approximate solution that we can use at high magnetic fields. It is quite accurate if the cyclotron radius is small enough that the confining potential can be assumed to be nearly constant on this scale.
+\subsection{Magneto-electric subbands at high magnetic fields}
+We know that if the confining potential were absent, then the solutions to the Schrodinger equation would given by 
+\begin{equation}
+    \begin{aligned}
+        \Psi_{n,k}(x,y) & = \frac{1}{\sqrt{L}} \exp(\ii k x) u_n(q+q_k)\equiv \ket{n,k} \\
+        E(n,k) & = E_s + (n+\frac{1}{2})\hbar \omega_c, \quad n = 0,1,2,\cdots
+    \end{aligned}
+\end{equation}
+where 
+\begin{equation}
+    \begin{aligned}
+        & u_n(q) = \exp(-q^2/2) H_n(q)\\
+        & q = \sqrt{m\omega_c/\hbar}y, \quad q_k = \sqrt{m\omega_c/\hbar} y_k \\
+        & y_k \equiv \frac{\hbar k}{e B}, \quad \omega_c \equiv \frac{\abs{e} B}{m}
+    \end{aligned}
+\end{equation}
+$H_n(q)$ is the $n$th Hermite polynomial. Now let us use the lowest order perturbation theory to include the effect of the confining potential $U(y)$. 
+\begin{equation}
+    E(n,k) \approx E_s + (n + \frac{1}{2})\hbar \omega_c + \bra{n,k} U(y) \ket{n,k}
+\end{equation}
+Note that each state $(n,k)$ is centered around a differnet localtion $y=y_k$ in the transverse direction and has a spatial extent of $\sim (\hbar/m\omega_c)^{1/2}$. Assuming that the potential $U(y)$ is nearly constant over the extent of each state, we can write
+\begin{equation}
+    E(n,k) \approx E_s + (n + \frac{1}{2})\hbar \omega_c + U(y_k), y_k = \hbar k / e B
+\end{equation}
+Figure 4.1.1b shows a sketch of the dispersion relation. It looks just like the confining potential $U(y)$, with the coordinate y mapped onto the wavenumber $k$ by the relation $y_k = \hbar k/e B$. In the middle of the sample the states look just like the Landau levels of an unconfined 2D conductor spaced by $\hbar \omega_c$. Near the edges there are allowed states with a continuous distribution of energies. These are referred to as the edge states and they play a very important role in carrying the current at the resistance minimum.\\
+We can calculate the velocity of an electron in the state $(n,k)$ as follows:
+\begin{equation}
+    v(n,k) = \frac{1}{\hbar} \pdv{E(n,k)}{k} = \frac{1}{\hbar} \pdv{U(y_k)}{k} = \frac{1}{\hbar} \pdv{U(y_k)}{y_k} \pdv{y_k}{k} = \frac{1}{e B} \pdv{U(y_k)}{y_k}
+\end{equation}
+Thus the states located at the two edges of the sample carry current in opposite directions since the slope of the confining potential is opposite at the two edges. The resistance of the sample is determined by the rate at which the electrons in states between $\mu_1$ and $\mu_2$ can relax their momentum. The statees carrying current in one direction are spatially separated from those carrying current in the opposite direction. To relax momentum an electron has to be scattered from the left of the sample to the right of the smaple. This is all but impossible since the overlap between the wavefunctions is exponentially small and there are no allowed states in the interior of the sample in this energy range ($\mu_1 > E > \mu_2$).
+As a result of this complete supperssion of backscattering, electron originating in the left contact enter the edge states carrying current to the right and empty into the right contact, while electrons in the right contact enter the edge states carrying current to the left and empty into the left contact.Consequently, the edge states carrying current to the right are completely in equilibrium with the left contact and have a quasi-Fermi energy equal to $\mu_L$. They are unaffected by $\mu_R$ since no electron originating in the right contact ever makes it to these states. Similarly we can argue that the edge states carrying current to the left all originate from the right contact and have a quasi-Fermi energy equal to $\mu_R$
+\begin{equation}
+    \mu_1 = \mu_L, \quad \mu_2 = \mu_R
+\end{equation}
+Clearly the longitudinal voltage drop $V_L$ as measured by two voltage probes located anywhere on the same side of the sample is zero, while the transverse (or Hall) voltage $V_H$ measured by two probes located anywhere on opposite sides of the sample is equal to the applied voltage:
+\begin{equation}
+    V_L = 0, \quad eV_H = \mu_L - \mu_R
+\end{equation}
+Note that this situation arises only when the electrochemical potentials lie between two bulk Landau levels. If the elecrochemical potentials lie on a bulk Landau level then there is a continuous distribution of allowed states from one edge to the other. Electrons can scatter from the left of the sample to the right of the sample through the allowed energy states in the interior of the sample. This backscattering gives rise to a maximum in the longitudinal resistance every time the Fermi energy lies on a bulk Landau level.
+\subsection{What is the current?}
+The number of edge states (which is equal to the number of filled Landau levels in the bulk) plays the role played by the number of modes in a ballistic conductor so that we can write
+\begin{equation}
+    I = \frac{2 e}{h} M (\mu_L - \mu_R)
+\end{equation}
+We could derive this formally as follows ($k_L$ and $k_R$ are the wavenumbers corresponding to $E = \mu_L$ and $E = \mu_R$ respectively)
+\begin{equation}
+    \begin{aligned}
+        I & = 2e \sum_n \int^{\mu_L}_{\mu_R} \frac{1}{2 \pi}v(n,k)\dd k = 2e\sum_n \int^{k_L}_{k_R} \frac{1}{2 \pi} \frac{1}{\hbar} \pdv{E(n,k)}{k} \dd k \\
+        & = \frac{2 e}{h} \sum_n \int^{\mu_L}_{\mu_R} \dd E = \frac{2 e}M\left[ \mu_L - \mu_R \right]
+    \end{aligned}
+\end{equation}
+Hence we can write down the longitudinal and Hall resistances:
+\begin{equation}
+    R_L = \frac{V_L}{I} = 0, \quad R_H = \frac{V_H}{I} = \frac{h}{2 e^2 M}
+\end{equation}
+where $M$ is the number of edge states at the Fermi energy, which is the number of bulk Landau levels below the Fermi energy. $M$ takes on integer values that decrease as the magnetic field is increased. What is impressive is the striking accuracy of the quantization of $R_H$ that is obtained at high magnetic fields.
+\section{Application of the Buttiker formalism}
+\begin{equation}
+    \begin{matrix}
+        G_{pq}: & q = 1 & q = 2 & q = 3 & q = 4 & q = 5 & q = 6 \\
+        p = 1 & 0 & 0 & 0 & 0 & 0 & G_C \\
+        p = 2 & G_C & 0 & 0 & 0 & 0 & 0 \\
+        p = 3 & 0 & G_C & 0 & 0 & 0 & 0 \\
+        p = 4 & 0 & 0 & G_C & 0 & 0 & 0 \\
+        p = 5 & 0 & 0 & 0 & G_C & 0 & 0 \\
+        p = 6 & 0 & 0 & 0 & 0 & G_C & 0
+    \end{matrix}
+\end{equation}
+where $G_C = 2 e^2 M/h$. Setting $V_4 = 0$
+\begin{equation}
+    \begin{pmatrix}
+        I_1 \\ I_2 \\ I_3 \\ I_5 \\ I_6
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        G_C & 0 & 0 & 0 & -G_C \\
+        -G_C & G_C & 0 & 0 & 0 \\
+        0 & -G_C & G_C & 0 & 0 \\
+        0 & 0 & 0 & G_C & 0 \\
+        0 & 0 & 0 & -G_C & G_C
+    \end{bmatrix}
+    \begin{pmatrix}
+        V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6
+    \end{pmatrix}
+\end{equation}
+The currents at the voltage terminals are all zero($I_2=I_3=I_5=I_6=0$)
+\begin{equation}
+    V_2 = V_3 = V_1, \quad V_5 = V_6 = 0
+\end{equation}
+Also the current is given by 
+\begin{equation}
+    I_1 = G_C V_1
+\end{equation}
+So that the longitudinal and Hall resistances are given by
+\begin{equation}
+    \begin{aligned}
+        R_L &= \frac{V_2 - V_3}{I_1} & = 0 \\
+        R_H &= \frac{V_2 - V_6}{I_1} & = \frac{h}{2 e^2 M}
+    \end{aligned}
+\end{equation}
 
+\subsection{Dose the current flow only at the edges?}
+We stated above that if $\mu_1>\mu_2$ then the states below $\mu_2$ are all filled and do not carry any net current. Any net current can be calculated from the filled states on the left between $\mu_1$ and $\mu_2$. However, this does not mean that currents everywhere in the sample. We could choose to do our bookkeeping in a differnet way so that the net current appears at a different spatial location. We have identified all the sates below $\mu_2$ as our Fermi sea which does not carry any net current. Consequently the net current is carried by the electrons in the edge states on the side of the sample with energies lying in the range $\mu_1 > E > \mu_2$. But we could just as well identify all the states below $\mu_1$ as our Fermi sea. The net current would then be carried by the holes occupying the edge staes on the other side of the sample!
+At low temperatures the current is carried by the states near the Fermi energy. States lying deep inside the Fermi sea have no effect on the conductance. But the local current density due to these states is not zero. These states give rise to circulating currents in the sample even at equilibrium. An applied electric field can induce a change in this circulating current flow pattern thus contributing to the confuctivity tensor defined by the relation $\delta \vec{J} = \sigma \delta E$. Thus electrons deep inside the Fermi sea can contribute to the conductivity, even though they do not contribute to th conductance.
+\subsection{Why should the Fermi energy ever lie between Landau levels?}
+The above discussion shows that the longitudinal resistance can be extremely small if the electrochemical potentials $\mu_1$ and $\mu_2$ were located between bulk Landau levels. This requires that the equilibrium Fermi energy $E_f$ must be located between the Landau levels since at low bias $\mu_1 \sim \mu_2 \sim E_f$. How is the location of $E_f$ determined?\\
+At low temperatures we can write
+\begin{equation}
+    n_s = \int^{E_f}_{-\infty} N_s(E,B) \dd E
+\end{equation}
+where $n_s$ is the electron density and $N_s$ is the density of states. The electron density increases with Fermi energy as shown in Fig.4.1.4. The important point to note is that the electron density increases rapidly whenever the density of states is high. This is because a change in the electron density is related to the change in the Fermi energy by the relation
+\begin{equation}
+    \delta n_s = N_s(E_f,B) \delta E_f
+\end{equation}
+\subsection{Fractional quantum Hall effect}
+We have seen that in the quantum Hall regime the Hall resistance takes on quantized values given by
+\begin{equation}
+    \rho_{yx} = \frac{h}{2 e^2 M}, \quad M = 1,2,3,\cdots
+\end{equation}
+Actually at high fields the energy levels for the two spins split apart due to the Zeeman effect and quantized plateaus are obtained with
+\begin{equation}
+    \rho_{yx} = \frac{h}{e^2 M}
+\end{equation}
+When the magnetic field reaches a value such that the electron density $n_s = eB/h$, we will have all the electrons in a single Landau level with one spin. For a carrier density of $n_s = 2\times 10^{11}/\text{cm}^2$ this requires a field of about 8$T$. What happens if we increase the field further?\\
+From our earlier discussion we might expect that there will be no further plateaus with increasing magnetic field since the Fermi energy now lies in the middle of a Landau level. Experimentally, however in very pure samples on continues to observe plateaus in the Hall resistivity given by 
+\begin{equation}
+    \rho_{yx} = \frac{h}{e^2 p}
+\end{equation}
+where $p$ is a rational fraction like $1/3$, $2/5$, $3/7$ etc. This phenomenon is called the fractional quantum Hall effect (FQHE) and cannot be explained using the one-electron picture presented so far. The explanation of the FQHE requires us to take into account the strong electron-electron interactions that occur when all the electrons are confined to the lowest Landau level. The basic idea is that the electrons can lower their mutual repulsion by forming a new type of collective state in which each electron is surrounded by a correlation hole (a region of reduced electron density) that keeps other electrons away. The resulting quasiparticles have fractional charge and give rise to the observed fractional quantum Hall effect.
 \end{document}
 
