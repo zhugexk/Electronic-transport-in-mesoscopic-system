@@ -74,21 +74,20 @@
 \begin{document}
 
 \maketitle
-\section*{Exercise 2.1(E.4.1, page 194)}
-Consider a slightly simplified form of the structure shown in Fig. 4.2.2 as shown in Fig.E.4.1
-\begin{enumerate}[label=(\alph*)]
-    \item Write down the conductance matrix for this structure assuming that there is no communication between edge states as the propagate from the constriction to terminal 3.
-    \item Use the Buttiker formula(Eq.(2.5.8)) to show that the Hall resistance is given by
-    \[
-        R_H = \frac{V_2 - V_3}{I} = \frac{h}{2e^2 M}\frac{1}{1-p}
-    \]
-    as reasoned in the text.
-\end{enumerate}
-
-\section*{Exercise 2.2(E.4.2, page 194)}
-Consider the same structure as in E.4.1 but with an extra terminal '5' inserted, as shown in Fig.E.4.2. Write down the conductance matrix for this sturcture and show that the Hall resistance is now given by
-\[
-    R_H = \frac{V_2-V_3}{I} = \frac{h}{2e^2 M}
-\]
-The extra terminal establishes an equilibrium between the edge states and changes the Hall resistance. This is a rather surprising result which has been observed experimentally. In macroscopic conductors, we do not expexted an extra floating probe('5') to affect the measurement.
+\section*{Exercise 2.7(E.2.5, page 115)}
+Coherent inelastic transport. In this book we will generally restrict ourselves to steady-state transport in the persence of a d.c. bias. However, it is interesting to note that if an alternating field is present within the conductor (but not inside the contacts) then we can define scattering states just like those in Eq.2.6.3 but with different energies all coupled together. A scattering state $(q,E)$ now consists of an incident wave with energy $E$ in lead $q$, together with scattered waves with energy ($E_n = E \pm n\hbar \omega$, $n$ being an integer) in every lead $p$ (Eq.2.6.3)
+\begin{equation*}
+    \Psi_p(q) = \delta_{pq} e^{\ii k x_q}\exp(-\ii E t/\hbar) + \sum_{p,n} s'_{pq}(E_n,E) \exp(-\ii k_n x_p) \exp(-\ii E_n t/\hbar)
+\end{equation*}
+Proceeding as before derive the following expression for the d.c. current:
+\begin{equation*}
+    I_p = \frac{2e}{h} \int \left[ f_p(E) - \sum_{q,n}T_{pq}(E_n, E) f_q(E) \right] \dd E
+\end{equation*}
+The point is that there is no reason to include any exclusion principle-related factors in the expression for the current even if transport is inelastic, as long as it is coherent. But if there are phase-breaking processes within the conductor then we cannot define coherent scattering states that extend from one lead to another and the scattering state argument cannot be used.
+\section*{Exercise 2.8(E.2.7, page 116)}
+Starting from the current expression
+\begin{equation*}
+    I_p = -\frac{2e}{h} \int \overline{T}(E) \left[ f_1(E) - f_2(E) \right] \dd E
+\end{equation*}
+derive the result stated in Eqs.2.5.4-2.5.6.
 \end{document}

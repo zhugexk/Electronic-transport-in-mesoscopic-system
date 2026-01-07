@@ -82,60 +82,25 @@ In Section 2.1 we calculate the contact resistance when a narrow conductor with 
 Assume reflectionless contacts as in the text. For futher discussions on the nature of the contact resistance at different types of interfaces see R.Landauer(1989), hys. Cond. Matter, 1, 8099 and M. C. Payne(1989), J. Phys. Cond. Matter, 1, 4931.
 
 \begin{proof}
-Beacuse of the reflectionless junction constraint, The right-moving population injected from the left contact into the conductor keeps the same
-\[
-    \mu_{ch}^+ = \mu_L^+
-\]
-and the left-moving population injected from the right contact into the conductor also keeps the same
-\[
-    \mu_{ch}^- = \mu_R^-
-\]
-But inside each contact, beacuse N is finite, the measured contact voltage drop is set by the reservoir electrochemical potentials:
-\[
-    eV = \mu_L - \mu_R
-\]
-The current is conserved throughout the structure, so we can calculate it inside the conductor where we have already known that
-\[
-    I = \frac{2e}{h}M(\mu_{ch}^+ - \mu_{ch}^-) = \frac{2e}{h}M(\mu_L^+ - \mu_R^-)
-\]
-in the left and right contacts, we have
-\[
-    I = \frac{2e}{h}N(\mu_L^+ - \mu_L^-), \quad I = \frac{2e}{h}N(\mu_R^+ - \mu_R^-)
-\]
-The reservoir electrochemical potentials equal the average of the right-moving and left-moving populations inside the contacts:
-\[
-    \mu_L = \frac{\mu_L^+ + \mu_L^-}{2}, \quad \mu_R = \frac{\mu_R^+ + \mu_R^-}{2}
-\]
-So the measured voltage is
-\[
-    eV = \mu_L - \mu_R = \frac{\mu_L^+ + \mu_L^-}{2} - \frac{\mu_R^+ + \mu_R^-}{2}
-\]
-The internal voltage drop which drives the current through the conductor is
-\[
-    \Delta \mu_{ch} = \mu_{ch}^+ - \mu_{ch}^- = \mu_L^+ - \mu_R^-
-\]
-Then we have
-\[
-    \Delta \mu_{ch} = \frac{h}{2e}\frac{I}{M}
-\]
-\[
-    \mu_L^+-\mu_L^- = \frac{h}{2e}\frac{I}{N}, \quad \mu_R^+ - \mu_R^- = \frac{h}{2e}\frac{I}{N}
-\]
-then $eV$ can be written as
+Because of the conservation of current, the current flowing through the conductor is given by
 \begin{equation}
-    \begin{aligned}
-        eV
-        & = \frac{(\mu_L^+ + \mu_L^-)-(\mu_R^- + \mu_R^+)}{2} \\
-        & = \frac{(\mu_L^+ - \mu_R^-)+(\mu_L^- - \mu_R^+)}{2} \\
-        & = \frac{(\mu_L^+ - \mu_R^-)}{2} + \frac{(\mu_L^+ - \mu_R^-)-\frac{hI}{eN}}{2} \\
-        & = \mu_L^+ - \mu_R^- - \frac{hI}{2eN} \\
-        & = \frac{hI}{2e}\left(\frac{1}{M} - \frac{1}{N}\right)
-    \end{aligned}
+    I = \frac{2e}{h}M[\mu_L - \mu_R] = \frac{2e}{h}N[\mu_L - \mu'] = \frac{2e}{h}N[\mu' - \mu_R]
 \end{equation}
-Therefore, the contact resistance is
-\[
-    R_c = \frac{V}{I} = \frac{h}{2e^2}\left(\frac{1}{M} - \frac{1}{N}\right)
-\]
+To simplify the algebra set $\mu_L = 1, \mu_R = 0$. This yields
+\begin{equation}
+    1 - \mu' = \mu'' = \frac{M}{N}
+\end{equation}
+Hence 
+\begin{equation}
+    eV = \frac{\mu_L + \mu'}{2} - \frac{\mu'' + \mu_R}{2} = \frac{1 + 1 - \frac{M}{N}}{2} - \frac{\frac{M}{N} + 0}{2} = 1 - \frac{M}{N}
+\end{equation}
+\begin{equation}
+    I = \frac{2e}{h}M
+\end{equation}
+Thus the contact resistance is given by
+\begin{equation}
+    R_c = \frac{V}{I} = \frac{h}{2e^2}\left[\frac{1}{M} - \frac{1}{N}\right]
+\end{equation}
 \end{proof}
 
 \end{document}

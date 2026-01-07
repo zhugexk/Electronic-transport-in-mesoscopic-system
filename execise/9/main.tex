@@ -74,21 +74,20 @@
 \begin{document}
 
 \maketitle
-\section*{Exercise 2.1(E.4.1, page 194)}
-Consider a slightly simplified form of the structure shown in Fig. 4.2.2 as shown in Fig.E.4.1
-\begin{enumerate}[label=(\alph*)]
-    \item Write down the conductance matrix for this structure assuming that there is no communication between edge states as the propagate from the constriction to terminal 3.
-    \item Use the Buttiker formula(Eq.(2.5.8)) to show that the Hall resistance is given by
-    \[
-        R_H = \frac{V_2 - V_3}{I} = \frac{h}{2e^2 M}\frac{1}{1-p}
-    \]
-    as reasoned in the text.
-\end{enumerate}
+\section*{Exercise 3.8(E.3.2, page 171)}
+Derive Eq.3.3.15 
+\begin{equation*}
+    G^R_E(x,y;x',y') = \sum_m -\frac{\ii}{\hbar v_m} \chi_m(y)\chi_m(y') \eexp^{\ii k_m \abs{x-x'}}
+\end{equation*}
+where $k_m = \frac{\sqrt{2m(E-\epsilon_{m,0})}}{\hbar}$ and $v_m = \frac{\hbar k}{m}$. For the Green's function of an infinite wire using a eigenfunctioin expansion Eq.3.3.17.
+\begin{equation*}
+    G^R(\vec{r},\vec{r}') = \sum_\alpha \frac{\psi_\alpha(\vec{r})\psi_\alpha^*(\vec{r}')}{E - \epsilon_\alpha + \ii \eta}
+\end{equation*}
 
-\section*{Exercise 2.2(E.4.2, page 194)}
-Consider the same structure as in E.4.1 but with an extra terminal '5' inserted, as shown in Fig.E.4.2. Write down the conductance matrix for this sturcture and show that the Hall resistance is now given by
-\[
-    R_H = \frac{V_2-V_3}{I} = \frac{h}{2e^2 M}
-\]
-The extra terminal establishes an equilibrium between the edge states and changes the Hall resistance. This is a rather surprising result which has been observed experimentally. In macroscopic conductors, we do not expexted an extra floating probe('5') to affect the measurement.
+\section*{Execise 3.9(E.3.3, page 171)}
+Show that the Green's function for a semi-infinite lead $p$ can be written as
+\begin{equation*}
+    g^R_p(p_i,p_j) = -\frac{1}{t} \sum_m \chi_m(p_i)\exp(+\ii k_m a)\chi_m (p_j)
+\end{equation*}
+where the index $m$ represents the propagating modes in lead $p$.
 \end{document}

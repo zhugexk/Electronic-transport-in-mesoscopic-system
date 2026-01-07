@@ -1,0 +1,116 @@
+\documentclass[11pt,a4paper]{article}
+%-------------------------
+% Basic packages
+%-------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{physics}    % convenient bra-ket, derivatives, etc.
+\usepackage{siunitx}    % units
+\usepackage{braket}     % alternate bra/ket macros
+\usepackage{mhchem}     % chemistry notation if needed
+
+% Figures & graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% References, hyperlinks, and clever names
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% Lists and layout
+\usepackage{enumitem}
+\setlist{itemsep=2pt,parsep=2pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%-------------------------
+% Useful macros
+%-------------------------
+% \newcommand{\dd}{\mathrm{d}}                      % differential
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\eexp}{\mathrm{e}}                    % exponential base
+\DeclareMathOperator{\sgn}{sgn}
+
+% Shortcuts for common physics notation (overrides safe if physics package present)
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+%-------------------------
+% Bibliography (biber/biblatex) - optional
+%-------------------------
+% \usepackage[backend=biber,style=phys]{biblatex}
+% \addbibresource{references.bib}
+
+%-------------------------
+% Document metadata
+%-------------------------
+\title{Execise 2}
+\author{Zhuge X.K.}
+\date{\today}
+
+%-------------------------
+% Document
+%-------------------------
+\begin{document}
+
+\maketitle
+\section*{Exercise 2.6(E.2.6, page 115)}
+Show that the following orthogonality relation
+\begin{equation*}
+    \int \left[ \chi_{m,k} \left( \frac{\hbar(k+k')}{2} + eBy \right) \chi_{n,k'} \right] \dd y = \delta_{k,k'}
+\end{equation*}
+where the two function $\chi_{m,k}(y)$ and $\chi_{n,k'}(y)$ satisfy
+\begin{equation*}
+    \begin{aligned}
+        & \left[ E_s + \frac{(\hbar k + eBy)^2}{2 m} + \frac{p_y^2}{2m} + U(y) \right] \chi_{m,k}(y) = E\chi_{m,k}(y) \\
+        & \left[ E_s + \frac{(\hbar k' + eBy)^2}{2 m} + \frac{p_y^2}{2m} + U(y) \right] \chi_{n,k'}(y) = E\chi_{n,k'}(y)
+    \end{aligned}
+\end{equation*}
+\begin{proof}
+    Subsituting $\chi_{n,k'}(y)$ and $\chi_{m,k}(y)$ into the Schrödinger equation, we have
+    \begin{equation*}
+        \begin{aligned}
+            & \chi_{n,k'}(y) \left[ E_s + \frac{(\hbar k + eBy)^2}{2 m} + \frac{p_y^2}{2m} + U(y) \right] \chi_{m,k}(y) = E\chi_{m,k}(y) \\
+            & \chi_{m,k}(y) \left[ E_s + \frac{(\hbar k' + eBy)^2}{2 m} + \frac{p_y^2}{2m} + U(y) \right] \chi_{n,k'}(y) = E\chi_{n,k'}(y)
+        \end{aligned}
+    \end{equation*}
+    Subtracting the two equations, we get
+    \begin{equation*}
+        \begin{aligned}
+            & \chi_{n,k'}(y) \left[ E_s + \frac{(\hbar k + eBy)^2}{2 m} + \frac{p_y^2}{2m} + U(y) \right] \chi_{m,k}(y) \\
+            - &\chi_{m,k}(y) \left[ E_s + \frac{(\hbar k' + eBy)^2}{2 m} + \frac{p_y^2}{2m} + U(y) \right] \chi_{n,k'}(y) \\
+            = & E\chi_{m,k}(y)\chi_{n,k'}(y) - E\chi_{n,k'}(y)\chi_{m,k}(y) \\
+            \Rightarrow & \chi_{n,k'}(y) \frac{(\hbar k + eBy)^2-(\hbar k' + eBy)^2}{2 m} \chi_{m,k}(y) = 0 \\
+            \Rightarrow & \chi_{n,k'}(y) \frac{\hbar(k-k')(\hbar(k+k') + 2eBy)}{2 m} \chi_{m,k}(y) = 0
+        \end{aligned}
+    \end{equation*}
+    Integrating both sides over $y$, we have
+    \begin{equation*}
+        \int \chi_{n,k'}(y) \frac{\hbar(k+k') + 2eBy}{2 m} \chi_{m,k}(y) \dd y = 0, \quad \text{if } k \neq k'
+    \end{equation*}
+    By nomailzing the wave function in appropriate way, we have
+    \begin{equation*}
+        \int \chi_{m,k} \left( \frac{\hbar(k+k')}{2} + eBy \right) \chi_{n,k'} \dd y = \delta_{k,k'}
+    \end{equation*}
+\end{proof}
+\end{document}

@@ -74,21 +74,47 @@
 \begin{document}
 
 \maketitle
-\section*{Exercise 2.1(E.4.1, page 194)}
-Consider a slightly simplified form of the structure shown in Fig. 4.2.2 as shown in Fig.E.4.1
-\begin{enumerate}[label=(\alph*)]
-    \item Write down the conductance matrix for this structure assuming that there is no communication between edge states as the propagate from the constriction to terminal 3.
-    \item Use the Buttiker formula(Eq.(2.5.8)) to show that the Hall resistance is given by
-    \[
-        R_H = \frac{V_2 - V_3}{I} = \frac{h}{2e^2 M}\frac{1}{1-p}
-    \]
-    as reasoned in the text.
+\section*{Exercise 3.2}
+At the interface between the normal metal and the superconductor, Andreev reflection occur. The BdG equation can be written as:
+\begin{equation*}
+    \ii \hbar \partial_t 
+    \begin{pmatrix}
+        f\\
+        g
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -\frac{\hbar^2}{2m}\nabla^2 - \mu(x) + V(x) & \Delta(x)\\
+        \Delta^* & \frac{\hbar^2}{2m}\nabla^2 + \mu(x) - V(x)
+    \end{pmatrix}
+    \begin{pmatrix}
+        f\\
+        g 
+    \end{pmatrix}
+\end{equation*}
+where $\Delta(x) = \theta(x)\Delta$ and $V(x) = H\delta(x)$.
+\begin{enumerate}
+    \item Prove $u_0^2 = 1 - v_0^2 = \frac{1}{2}(1 + \sqrt{E^2-\Delta^2}/E)$ and $\hbar k^{\pm} = \sqrt{2m(\mu \pm \sqrt{E^2 - \Delta^2})}$.
+    \item Solve the scattering coefficient of this scattering problem.
 \end{enumerate}
-
-\section*{Exercise 2.2(E.4.2, page 194)}
-Consider the same structure as in E.4.1 but with an extra terminal '5' inserted, as shown in Fig.E.4.2. Write down the conductance matrix for this sturcture and show that the Hall resistance is now given by
-\[
-    R_H = \frac{V_2-V_3}{I} = \frac{h}{2e^2 M}
-\]
-The extra terminal establishes an equilibrium between the edge states and changes the Hall resistance. This is a rather surprising result which has been observed experimentally. In macroscopic conductors, we do not expexted an extra floating probe('5') to affect the measurement.
+Hint: use plane-wave ansatz:
+\begin{equation*}
+    \begin{pmatrix}
+        f\\
+        g   
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        u\\
+        v
+    \end{pmatrix}
+    \eexp^{\ii (kx-Et/\hbar)}
+\end{equation*}
+then solve the stationary eigenvalue equation and apply the boundary condition at $x=0$.
+\section*{Execise 3.3}
+Prove the current conservation of quasi-particles in Andreev reflection problem:
+\begin{equation*}
+    \partial_t \rho + \nabla \cdot \vec{J}_\rho = 0
+\end{equation*}
+where $\rho=\abs{f}^2 + \abs{g}^2$ and $\vec{J}_\rho = \frac{\hbar}{m} \left[ \Im(f^*\nabla f) - \Im (g^*\nabla g) \right]$
 \end{document}

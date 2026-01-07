@@ -1,0 +1,108 @@
+\documentclass[11pt,a4paper]{article}
+%-------------------------
+% Basic packages
+%-------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{physics}    % convenient bra-ket, derivatives, etc.
+\usepackage{siunitx}    % units
+\usepackage{braket}     % alternate bra/ket macros
+\usepackage{mhchem}     % chemistry notation if needed
+
+% Figures & graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% References, hyperlinks, and clever names
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% Lists and layout
+\usepackage{enumitem}
+\setlist{itemsep=2pt,parsep=2pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%-------------------------
+% Useful macros
+%-------------------------
+% \newcommand{\dd}{\mathrm{d}}                      % differential
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\eexp}{\mathrm{e}}                    % exponential base
+\DeclareMathOperator{\sgn}{sgn}
+
+% Shortcuts for common physics notation (overrides safe if physics package present)
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+%-------------------------
+% Bibliography (biber/biblatex) - optional
+%-------------------------
+% \usepackage[backend=biber,style=phys]{biblatex}
+% \addbibresource{references.bib}
+
+%-------------------------
+% Document metadata
+%-------------------------
+\title{Execise 2}
+\author{Zhuge X.K.}
+\date{\today}
+
+%-------------------------
+% Document
+%-------------------------
+\begin{document}
+
+\maketitle
+\section*{Exercise 2.3(E.2.3, page 113)}
+Consider a cross juction as shown in Fig.E.1. Assuming that the four ports are completely symmetric, we can define a coefficient for forward trasmission, one for right turning and for left turning as follows:
+\begin{equation*}
+    \begin{aligned}
+        & \overline{T}_{13} = \overline{T}_{31} = \overline{T}_{42} = \overline{T}_{24} = T_F \\
+        & \overline{T}_{21} = \overline{T}_{31} = \overline{T}_{43} = \overline{T}_{14} = T_R \\
+        & \overline{T}_{41} = \overline{T}_{12} = \overline{T}_{23} = \overline{T}_{34} = T_L
+    \end{aligned}
+\end{equation*}
+We have reproduced the measured values of $T_F, T_L$ and $T_R$ as a function of the magnetic field from Phys. Rev. B, 46, 9653-4(1992). See this reference for a description of how the transmission functions are measured.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose we measure the Hall resistance $R_H$ by running a current from 1 to 3 and measuring the voltage between 2 and 4. Show that
+    \begin{equation*}
+        R_H = \frac{h}{2e^2}\frac{T_R^2 - T_L^2}{(T_R + T_L)[T_R^2 + T_L^2 + 2T_F(T_F + T_R + T_L)]}
+    \end{equation*}
+    \item Use the data provided above to calculate $R_H$ vs. B numerically from the relation derived in part (a).
+\end{enumerate}
+\section*{Exercise 2.4(E.2.4, page 114)}
+We would expect the conductance of two apertures in series to be half that of a single aperture: $G = M(2e^2/h) \times 0.5$. But if the two apertures are sufficiently close together then the electrons emerging from one aperture do not have the chance to spread out before they reach the second aperture. Consequently the conductance is the same as that of a single aperture: $G = M(2e^2/h)$. But if we turn on a magnetic field then the electrons get deflected and the conductance is reduced(see A. A. M. Staring et al. (1990), Phys. Rev. B, 41, 8461). Use the Buttiker formula to show that the conductance is given by (see C. W. J. Beenakker and H. van Houten (1989), Phys. Rev. B, 39, 10445)
+\begin{equation*}
+    G = \frac{e^2}{h}\left[ M + T_F + \frac{(T_R-T_L)^2}{2T_F' + T_R + T_L}\right]
+\end{equation*}
+where
+\begin{equation*}
+    \begin{aligned}
+        & \overline{T}_{13} = \overline{T}_{31} = T_F \\
+        & \overline{T}_{42} = \overline{T}_{24} = T_F' \\
+        & \overline{T}_{21} = \overline{T}_{32} = \overline{T}_{43} = \overline{T}_{14} = T_R \\
+        & \overline{T}_{41} = \overline{T}_{12} = \overline{T}_{23} = \overline{T}_{34} = T_L
+    \end{aligned}
+\end{equation*}
+\end{document}
