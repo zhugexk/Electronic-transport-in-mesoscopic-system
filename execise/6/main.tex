@@ -84,10 +84,40 @@ Proceeding as before derive the following expression for the d.c. current:
     I_p = \frac{2e}{h} \int \left[ f_p(E) - \sum_{q,n}T_{pq}(E_n, E) f_q(E) \right] \dd E
 \end{equation*}
 The point is that there is no reason to include any exclusion principle-related factors in the expression for the current even if transport is inelastic, as long as it is coherent. But if there are phase-breaking processes within the conductor then we cannot define coherent scattering states that extend from one lead to another and the scattering state argument cannot be used.
+\begin{proof}
+    \begin{equation*}
+        i_{pq,n} = \frac{2e}{h} \left[\delta_{pq} - T_{pq}(E_n,E)\right]
+    \end{equation*}
+    Assuming that a scattering state originating in lead $q$ is occupied according to the Fermi function $f_q(E)$, we have
+    \begin{equation*}
+        I_p = \sum_{q,n} \int f_q(E) i_{pq,n}\dd E = \frac{2e}{h} \int \left[ f_p(E) - \sum_{q,n} T_{pq}(E_n,E) f_q(E) \right] \dd E
+    \end{equation*}
+\end{proof}
 \section*{Exercise 2.8(E.2.7, page 116)}
 Starting from the current expression
 \begin{equation*}
     I_p = -\frac{2e}{h} \int \overline{T}(E) \left[ f_1(E) - f_2(E) \right] \dd E
 \end{equation*}
 derive the result stated in Eqs.2.5.4-2.5.6.
+\begin{proof}
+    \begin{equation*}
+        \begin{aligned}
+            f_1(E) - f_2(E) &= \frac{1}{1+\exp\left(\frac{E-\mu_1}{kT}\right)} - \frac{1}{1+\exp\left(\frac{E-\mu_2}{kT}\right)} \\
+            & = \int^{\mu_1}_{\mu_2} \dv{}{E'} \frac{1}{1+\exp\left(\frac{E-E'}{k_B T}\right)} \dd E' \\
+            & = \int^{\mu_1}_{\mu_2} \left[ -\dv{}{E-E'}\frac{1}{\exp \left[ (E-E')/k_B T \right]} + 1 \right] \\
+        \end{aligned}
+    \end{equation*}
+    Define
+    \begin{equation*}
+        F_T(E) = -\dv{}{E} \frac{1}{\exp(E/k_B T) + 1} = \frac{1}{4 k_B T \cosh^2\left(\frac{E}{2 k_B T}\right)}
+    \end{equation*}
+    we can write
+    \begin{equation*}
+        f_1(E) - f_2(E) = \int^{\mu_1}_{\mu_2} F_T(E - E') \dd E'
+    \end{equation*}
+    Thus,
+    \begin{equation*}
+        I = \frac{2e}{h} \int \overline{T}(E) \int^{\mu_1}_{\mu_2} F_T(E - E') \dd E' \dd E
+    \end{equation*}
+\end{proof}
 \end{document}

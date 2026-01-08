@@ -91,6 +91,51 @@ We have reproduced the measured values of $T_F, T_L$ and $T_R$ as a function of 
     \end{equation*}
     \item Use the data provided above to calculate $R_H$ vs. B numerically from the relation derived in part (a).
 \end{enumerate}
+
+\begin{proof}
+    Setting $V_4 = 0$ as reference, we have
+    \begin{equation*}
+        \begin{pmatrix}
+            I_1 \\ I_2 \\ I_3
+        \end{pmatrix}
+        = \frac{2e^2}{h}
+        \begin{bmatrix}
+            T_0 & -T_L & -T_F\\
+            -T_R & T_0 & -T_L\\
+            -T_F & -T_R & T_0
+        \end{bmatrix}
+        \begin{pmatrix}
+            V_1 \\ V_2 \\ V_3
+        \end{pmatrix}
+    \end{equation*}
+    where $T_0 = T_F + T_L + T_R$. Inverinting the matrix, we have
+    \begin{equation*}
+        \begin{pmatrix}
+            V_1 \\ V_2 \\ V_3
+        \end{pmatrix}
+        =
+        \begin{bmatrix}
+            R_{11} & R_{12} & R_{13}\\
+            R_{21} & R_{22} & R_{23}\\
+            R_{31} & R_{32} & R_{33}
+        \end{bmatrix}
+        \begin{pmatrix}
+            I_1 \\ I_2 \\ I_3
+        \end{pmatrix}
+    \end{equation*}
+    where
+    \begin{equation*}
+        R_{21} = \frac{h}{2e^2\Delta} [T_LT_0 + T_FT_R], \quad R_{23} = \frac{h}{2e^2\Delta} [T_RT_0 + T_FT_L]
+    \end{equation*}
+    and \begin{equation*}
+            \Delta = (T_L+T_R)\left[T_L^2 + T_R^2 +2T_F^2 +2T_F T_L + 2T_F T_R\right]
+        \end{equation*}
+        Since $I_1 = -I_3$ and $I_2 = 0$ , $V_2 = I_1 (R_{21} - R_{23})$. Therefore,
+    \begin{equation*}
+        R_H = \frac{V_2}{I_1} = \frac{h}{2e^2 \Delta} (T_L^2 - T_R^2) = \frac{h}{2e^2}\frac{T_L - T_R}{T_R^2 + T_L^2 + 2T_F(T_R + T_L)}
+    \end{equation*}
+\end{proof}
+
 \section*{Exercise 2.4(E.2.4, page 114)}
 We would expect the conductance of two apertures in series to be half that of a single aperture: $G = M(2e^2/h) \times 0.5$. But if the two apertures are sufficiently close together then the electrons emerging from one aperture do not have the chance to spread out before they reach the second aperture. Consequently the conductance is the same as that of a single aperture: $G = M(2e^2/h)$. But if we turn on a magnetic field then the electrons get deflected and the conductance is reduced(see A. A. M. Staring et al. (1990), Phys. Rev. B, 41, 8461). Use the Buttiker formula to show that the conductance is given by (see C. W. J. Beenakker and H. van Houten (1989), Phys. Rev. B, 39, 10445)
 \begin{equation*}
@@ -105,4 +150,52 @@ where
         & \overline{T}_{41} = \overline{T}_{12} = \overline{T}_{23} = \overline{T}_{34} = T_L
     \end{aligned}
 \end{equation*}
+\begin{proof}
+    Setting $V_3 = 0$ as reference, we have
+    \begin{equation*}
+    \begin{pmatrix}
+            I_1 \\ I_2 \\ I_4
+        \end{pmatrix}
+        = \frac{2e^2}{h}
+        \begin{bmatrix}
+            T_0 & -T_L & -T_R\\
+            -T_R & T_0' & -T_F'\\
+            -T_L & -T_F' & T_0'
+        \end{bmatrix}
+        \begin{pmatrix}
+            V_1 \\ V_2 \\ V_4
+        \end{pmatrix}
+    \end{equation*}
+    where $T_0 = T_F+T_L+T_R$ and $T_0' = T_F' + T_L + T_R$. Inverting the matrix, we have
+    \begin{equation*}
+        \begin{pmatrix}
+            V_1 \\ V_2 \\ V_4
+        \end{pmatrix}
+        =
+        \begin{bmatrix}
+            R_{11} & R_{12} & R_{14}\\
+            R_{21} & R_{22} & R_{24}\\
+            R_{41} & R_{42} & R_{44}
+        \end{bmatrix}
+        \begin{pmatrix}
+            I_1 \\ I_2 \\ I_4
+        \end{pmatrix}
+    \end{equation*}
+    where
+    \begin{equation*}
+        R_{11} = \frac{h}{2e^2 \Delta} \left[T_0'^2 - T_F'^2\right]
+    \end{equation*}
+    and
+    \begin{equation*}
+        \Delta = T_0\left[ T_0'^2 - T_F'^2 \right]- T_F' \left[T_L^2 + T_R^2\right] - 2T_0' T_L T_R
+    \end{equation*}
+    Since $I_2 = I_4 = 0$, $V_1 = I_1 R_{11}$, so that the conductance is given by
+    \begin{equation*}
+        \begin{aligned}
+            G & = R_11^{-1} = \frac{2e^2}{h} \frac{\Delta}{T_0'^2 - T_F'^2} = \frac{2e^2}{h} \left[T_0 - \frac{T_F' (T_L^2 + T_R^2) + 2T_0' T_L T_R}{T_0'^2 - T_F'^2}\right] \\
+            & = \frac{e^2}{h} \left[ T_0 + T_F + \frac{(T_L - T_R)^2}{2T_F' + T_R + T_L}\right]
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+
 \end{document}
